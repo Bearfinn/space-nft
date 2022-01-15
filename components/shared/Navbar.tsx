@@ -13,7 +13,13 @@ const menuList = [
     name: "Explore",
     href: "/explore",
   },
+  {
+    name: "Fleet",
+    href: "/fleet",
+  }
 ];
+
+const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
   const { authenticate, isAuthenticated, user } = useMoralis();
@@ -31,8 +37,8 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
   }, [isAuthenticated, signIn]);
 
   return (
-    <div className="p-4 flex justify-between sticky">
-      <div className="space-x-4">
+    <div className="p-8 flex justify-between sticky">
+      <div className="space-x-8">
         {menuList.map(({ name, href }) => {
           return (
             <Link href={href} key={name}>
@@ -41,6 +47,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           );
         })}
       </div>
+
       <button onClick={() => signIn()}>
         Connect Wallet {user?.get("ethAddress")}
       </button>

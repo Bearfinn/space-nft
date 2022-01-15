@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       appId={process.env.NEXT_PUBLIC_MORALIS_APP_ID as string}
       serverUrl={process.env.NEXT_PUBLIC_MORALIS_SERVER_URL as string}
     >
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-black bg-opacity-75 text-white min-h-screen">
         <Navbar />
         <Component {...pageProps} />
       </div>
