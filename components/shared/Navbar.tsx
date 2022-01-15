@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useCallback, useEffect } from "react";
+import { useMoralis } from "react-moralis";
 
 interface NavbarProps {}
 
@@ -15,6 +16,20 @@ const menuList = [
 ];
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
+  const { authenticate, isAuthenticated, user } = useMoralis();
+
+  const signIn = useCallback(() => {
+    authenticate({
+      signingMessage: "Sign in to Space NFT",
+    });
+  }, [authenticate]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      signIn();
+    }
+  }, [isAuthenticated, signIn]);
+
   return (
     <div className="p-4 flex justify-between sticky">
       <div className="space-x-4">
@@ -26,7 +41,9 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           );
         })}
       </div>
-      <div>Connect Wallet</div>
+      <button onClick={() => signIn()}>
+        Connect Wallet {user?.get("ethAddress")}
+      </button>
     </div>
   );
 };
