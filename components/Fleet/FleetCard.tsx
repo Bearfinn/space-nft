@@ -13,7 +13,7 @@ const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
   const { addShipToFleet } = useFleet()
 
   return ship ? (
-    <div className="rounded-lg bg-gray-900 bg-opacity-75 w-72 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
+    <div className="rounded-lg bg-stone-900 bg-opacity-75 w-72 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
       <div className="rounded-t-lg relative">
         <Image src={ship.src} alt="Spaceship" width={360} height={200}></Image>
         <div className="absolute top-3 right-3">
@@ -29,7 +29,7 @@ const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
           <FleetProperty name="Mining Speed" value={ship.miningSpeed} />
         </div>
       </div>
-      <div className="bg-gray-800">
+      <div className="bg-stone-800">
         <div className="flex justify-between mt-6">
           <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>To Fleet</Button>
           <Button>Sell</Button>

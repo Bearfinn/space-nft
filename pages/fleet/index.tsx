@@ -18,7 +18,8 @@ const fleet: Fleet = {
 const FleetPage: FunctionComponent<FleetPageProps> = () => {
   return (
     <div className="container max-w-2xl mx-auto">
-      <div className="text-2xl my-8">Fleets</div>
+      <div className="text-4xl font-mono my-8">Fleet</div>
+
       <div className="flex flex-wrap justify-between space-y-8">
         {[1, 2, 3, 4].map((val) => {
           return <FleetCard ship={fleet} key={val} />;

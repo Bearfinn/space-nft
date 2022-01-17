@@ -16,7 +16,7 @@ const Home: NextPage = () => {
           alt="Spaceship"
         ></Image>
       </div>
-      <div className="bg-gray-900 bg-opacity-75 py-16">
+      <div className="bg-stone-900 bg-opacity-75 py-16">
         <div className="max-w-4xl container mx-auto">
           <div>
             <div className="text-2xl font-mono">Explore in the vast space</div>
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="text-center text-gray-300 my-16">
+      <div className="text-center text-stone-300 my-16">
         <div>This game is a part of Moralis X Avalanche Hackathon</div>
         <Image
           src="/logo/powered-by-moralis.svg"
