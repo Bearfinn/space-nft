@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
+import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 import { Fleet, IShipMetadata } from "types/Items";
 
 export const useNFTs = () => {
   const Web3Api = useMoralisWeb3Api();
-  const [mineral, setMineral] = useState("0");
-  const [crystal, setCrystal] = useState("0");
-  const [fuel, setFuel] = useState("0");
+  const [mineral, setMineral] = useState(0);
+  const [crystal, setCrystal] = useState(0);
+  const [fuel, setFuel] = useState(0);
   const [nfts, setNfts] = useState<any[]>([]);
 
+  const { Moralis } = useMoralis()
   const { data, error, fetch, isFetching, isLoading } = useMoralisWeb3ApiCall(
     Web3Api.account.getNFTsForContract,
     {
@@ -38,13 +39,13 @@ export const useNFTs = () => {
 
         // Tokens
         if (tokenId === 0) {
-          setMineral(nft.amount || "0");
+          setMineral(Moralis.Units.FromWei(nft.amount || "0"));
         }
         if (tokenId === 1) {
-          setCrystal(nft.amount || "0");
+          setCrystal(Moralis.Units.FromWei(nft.amount || "0"));
         }
         if (tokenId === 2) {
-          setFuel(nft.amount || "0");
+          setFuel(Moralis.Units.FromWei(nft.amount || "0"));
         }
 
         // Avatars
@@ -105,5 +106,8 @@ export const useNFTs = () => {
 
   return {
     nfts,
+    crystal,
+    mineral,
+    fuel,
   };
 };

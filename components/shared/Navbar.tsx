@@ -1,3 +1,4 @@
+import { useNFTs } from "hooks/useInventory";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FunctionComponent, useCallback, useEffect } from "react";
@@ -24,12 +25,12 @@ const menuList = [
   },
   {
     name: "Refinery",
-    href: "/refinery"
+    href: "/refinery",
   },
   {
     name: "Shop",
     href: "/shop",
-  }
+  },
 ];
 
 const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
@@ -37,6 +38,8 @@ const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
 const Navbar: FunctionComponent<NavbarProps> = () => {
   const { authenticate, isAuthenticated, user } = useMoralis();
   const router = useRouter();
+
+  const { crystal, mineral, fuel } = useNFTs();
 
   const signIn = useCallback(() => {
     authenticate({
@@ -67,6 +70,14 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           );
         })}
       </div>
+
+      {user && (
+        <div className="flex gap-4">
+          <div>{crystal} CRY</div>
+          <div>{mineral} MIN</div>
+          <div>{fuel} FUEL</div>
+        </div>
+      )}
 
       <button onClick={() => signIn()}>
         Connect Wallet {user?.get("ethAddress")}
