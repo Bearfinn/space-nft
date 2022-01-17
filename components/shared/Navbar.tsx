@@ -21,6 +21,14 @@ const menuList = [
   {
     name: "Inventory",
     href: "/inventory",
+  },
+  {
+    name: "Refinery",
+    href: "/refinery"
+  },
+  {
+    name: "Shop",
+    href: "/shop",
   }
 ];
 
