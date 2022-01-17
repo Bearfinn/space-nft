@@ -31,7 +31,7 @@ const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
       </div>
       <div className="bg-gray-800">
         <div className="flex justify-between mt-6">
-          <Button onClick={() => addShipToFleet(ship.tokenId)}>To Fleet</Button>
+          <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>To Fleet</Button>
           <Button>Sell</Button>
         </div>
       </div>
