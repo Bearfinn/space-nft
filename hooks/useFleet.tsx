@@ -1,7 +1,7 @@
-import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 import SNFTABI from "constants/abi/SNFT.json";
 import { CONTRACTS } from "constants/contracts";
-import { useEffect } from "react";
+import { useMoralis } from "react-moralis";
+import { toast } from "react-toastify";
 
 export const useFleet = () => {
   const { Moralis, chainId, account } = useMoralis();
@@ -9,7 +9,13 @@ export const useFleet = () => {
   console.log(CONTRACTS["SNFT"][43113], chainId)
 
   const addShipToFleet = async (tokenId: number) => {
+    const toastId = "transaction";
+
     try {
+      toast("Please approve transaction", {
+        toastId,
+        isLoading: true
+      })
       const txResponse: any = await Moralis.Web3.executeFunction({
         contractAddress: CONTRACTS["SNFT"][43113],
         functionName: "addShipToFleet",
@@ -18,9 +24,23 @@ export const useFleet = () => {
           _tokenId: tokenId,
         },
       });
+      toast.update(toastId, {
+        render: "Confirming...",
+        isLoading: true
+      })
       const txReceipt = await txResponse.wait();
+      toast.update(toastId, {
+        type: "success",
+        render: "Done",
+        isLoading: false,
+      })
       console.log(txReceipt)
-    } catch (error) {
+    } catch (error: any) {
+      toast.update(toastId, {
+        type: "error",
+        render:  error.data.message,
+        isLoading: false,
+      })
       console.error(error)
     }
   };

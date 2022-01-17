@@ -5,3 +5,7 @@
 body {
   background-image: url("/assets/background.png");
 }
+
+:root {
+  --toastify-font-family: "IBM Plex Sans", sans-serif;
+}
