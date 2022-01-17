@@ -26,12 +26,8 @@ export const useFleet = () => {
   });
 
   useEffect(() => {
-    getFleets().then(() => {
-      console.log(fleets)
-      console.error(error)
-    })
-  }, [Moralis.Units, account, fleets, getFleets])
-  // k.fetch()
+    getFleets()
+  }, [Moralis.Units, account, error, getFleets])
 
   const addShipToFleet = useExecuteFunction<{ _tokenId: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],

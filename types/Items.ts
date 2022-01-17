@@ -18,3 +18,10 @@ export interface Fleet {
   travelSpeed: number;
   miningSpeed: number;
 }
+
+export interface RefineryInfo {
+  waitingToClaim: number;
+  productionPerSecond: number;
+  consumePerSecond: number;
+  lastUpdateTime: Date;
+}
