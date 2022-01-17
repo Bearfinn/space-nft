@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      "bafybeih4iuchjh3nqpsuirek7vekbznh5fn2ppc7icul4tqc4yampoqbei.ipfs.dweb.link"
+      "bafybeicpfmy6is5vqnjrncqxnryte2263he5pe6wgop2iuza4klndazgpq.ipfs.dweb.link"
     ]
   },
   webpack(config) {

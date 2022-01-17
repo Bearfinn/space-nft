@@ -13,8 +13,8 @@ export const useNFTs = () => {
     Web3Api.account.getNFTsForContract,
     {
       chain: "avalanche testnet",
-      address: "0x0bf8ed3f9357bfea8226c4e5a4d2bae6da22637e",
-      token_address: "0xF409B39CF3a852B1314520CA814D865Db42ef9B1",
+      address: "0xc437F7d1Ba3f0479A67E3198e2ce7f66d6cAeD25",
+      token_address: "0x7158f977a8fE672e026C8c69a82CD2935aF055Ac",
     }
   );
 
