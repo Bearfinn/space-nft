@@ -1,19 +1,11 @@
 import FleetCard from "components/Fleet/FleetCard";
 import { FunctionComponent } from "react";
+import { Fleet } from "types/Items";
 
 interface FleetPageProps {}
 
-export interface Fleet {
-  src: string;
-  name: string;
-  type: string;
-  hp: number;
-  attack: number;
-  travelSpeed: number;
-  miningSpeed: number;
-}
-
 const fleet: Fleet = {
+  tokenId: 1,
   src: "/sprites/battleship1.png",
   hp: 120,
   name: "Fleet",
@@ -29,7 +21,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
       <div className="text-2xl my-8">Fleets</div>
       <div className="flex flex-wrap justify-between space-y-8">
         {[1, 2, 3, 4].map((val) => {
-          return <FleetCard fleet={fleet} key={val} />;
+          return <FleetCard ship={fleet} key={val} />;
         })}
       </div>
     </div>

@@ -1,11 +1,14 @@
-import { HTMLProps, FunctionComponent } from "react";
+import { HTMLProps, FunctionComponent, HTMLAttributes } from "react";
 
-interface ButtonProps extends HTMLProps<HTMLButtonElement> {}
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
 
 const Button: FunctionComponent<ButtonProps> = (props) => {
-  const { children } = props;
+  const { children, ...buttonProps } = props;
   return (
-    <button className="border border-transparent bg-gray-800 shadow-lg hover:border-teal-300 px-4 py-2 rounded text-teal-300">
+    <button
+      className="border border-transparent bg-gray-800 shadow-lg hover:border-teal-300 px-4 py-2 rounded text-teal-300"
+      {...buttonProps}
+    >
       {children}
     </button>
   );

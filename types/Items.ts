@@ -9,6 +9,7 @@ export interface IShipMetadata {
 }
 
 export interface Fleet {
+  tokenId: number;
   src: string;
   name: string;
   type: string;
