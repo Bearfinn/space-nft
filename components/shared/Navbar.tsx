@@ -1,8 +1,11 @@
+import Button from "components/base/Button";
+import Icon from "components/base/Icon";
 import { useNFTs } from "hooks/useInventory";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FunctionComponent, useCallback, useEffect } from "react";
 import { useMoralis } from "react-moralis";
+import { shortenAddress } from "utils/format";
 
 interface NavbarProps {}
 
@@ -71,17 +74,27 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
         })}
       </div>
 
-      {user && (
-        <div className="flex gap-4">
-          <div>{crystal} CRY</div>
-          <div>{mineral} MIN</div>
-          <div>{fuel} FUEL</div>
-        </div>
-      )}
+      <div className="flex gap-4 items-center">
+        {user && (
+          <div className="flex gap-4">
+            <div className="flex gap-2 items-center">
+              {crystal} <Icon type="CRYSTAL" />
+            </div>
+            <div className="flex gap-2 items-center">
+              {mineral} <Icon type="MINERAL" />
+            </div>
+            <div className="flex gap-2 items-center">
+              {fuel} <Icon type="FUEL" />
+            </div>
+          </div>
+        )}
 
-      <button onClick={() => signIn()}>
-        Connect Wallet {user?.get("ethAddress")}
-      </button>
+        {user ? (
+          <Button>{shortenAddress(user?.get("ethAddress"))}</Button>
+        ) : (
+          <Button onClick={() => signIn()}>Connect Wallet</Button>
+        )}
+      </div>
     </div>
   );
 };

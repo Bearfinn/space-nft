@@ -39,13 +39,13 @@ export const useNFTs = () => {
 
         // Tokens
         if (tokenId === 0) {
-          setMineral(Moralis.Units.FromWei(nft.amount || "0"));
+          setMineral(Number(Moralis.Units.FromWei(nft.amount || "0")));
         }
         if (tokenId === 1) {
-          setCrystal(Moralis.Units.FromWei(nft.amount || "0"));
+          setCrystal(Number(Moralis.Units.FromWei(nft.amount || "0")));
         }
         if (tokenId === 2) {
-          setFuel(Moralis.Units.FromWei(nft.amount || "0"));
+          setFuel(Number(Moralis.Units.FromWei(nft.amount || "0")));
         }
 
         // Avatars

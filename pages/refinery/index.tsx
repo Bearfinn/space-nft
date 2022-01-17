@@ -2,6 +2,7 @@ import Button from "components/base/Button";
 import { useRefinery } from "hooks/useRefinery";
 import { FunctionComponent } from "react";
 import Image from "next/image";
+import Icon from "components/base/Icon";
 
 interface RefineryPageProps {}
 
@@ -33,15 +34,15 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Mineral Consumption
               </div>
               <div className="mt-1 font-mono">
-                -{refineryInfo?.consumePerSecond} MIN/s
+                -{refineryInfo?.consumePerSecond} <Icon type="MINERAL" />/s
               </div>
             </div>
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
-                Mineral Production
+                Crystal Production
               </div>
               <div className="mt-1 font-mono">
-                {refineryInfo?.productionPerSecond} MIN/s
+                {refineryInfo?.productionPerSecond} <Icon type="CRYSTAL" />/s
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Available for Claim
               </div>
               <div className="mt-1 font-mono">
-                {refineryInfo?.waitingToClaim} MIN
+                {refineryInfo?.waitingToClaim} <Icon type="CRYSTAL" />
               </div>
             </div>
             <div className="">
