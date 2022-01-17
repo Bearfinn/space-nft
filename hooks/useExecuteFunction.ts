@@ -16,7 +16,7 @@ export const useExecuteFunction = <ExecuteFunctionParams>({
   const { Moralis } = useMoralis();
 
   const executeFunction = useCallback(
-    async (params: ExecuteFunctionParams) => {
+    async (params?: ExecuteFunctionParams, value?: string) => {
       const toastId = "transaction";
 
       try {
@@ -29,6 +29,7 @@ export const useExecuteFunction = <ExecuteFunctionParams>({
           functionName,
           abi,
           params,
+          msgValue: value,
         });
         toast.update(toastId, {
           render: "Confirming...",

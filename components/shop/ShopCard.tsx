@@ -5,12 +5,14 @@ interface ShopCardProps {
   title: string;
   description: string;
   action: string;
+  onClick: () => void;
 }
 
 const ShopCard: FunctionComponent<ShopCardProps> = ({
   title,
   description,
   action,
+  onClick,
 }) => {
   return (
     <div className="rounded-lg text-center bg-stone-900 bg-opacity-75 h-[300px] p-8 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
@@ -21,7 +23,7 @@ const ShopCard: FunctionComponent<ShopCardProps> = ({
         </div>
 
         <div className="mt-4">
-          <Button>{action}</Button>
+          <Button onClick={onClick}>{action}</Button>
         </div>
       </div>
     </div>
