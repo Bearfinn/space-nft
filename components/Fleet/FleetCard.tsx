@@ -1,7 +1,7 @@
 import Button from "components/base/Button";
 import Image from "next/image";
-import { Fleet } from "pages/fleet";
 import { FunctionComponent } from "react";
+import { Fleet } from "types/Items";
 import FleetProperty from "./FleetProperty";
 
 interface FleetCardProps {

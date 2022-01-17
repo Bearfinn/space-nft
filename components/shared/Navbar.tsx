@@ -18,6 +18,10 @@ const menuList = [
     name: "Fleet",
     href: "/fleet",
   },
+  {
+    name: "Inventory",
+    href: "/inventory",
+  }
 ];
 
 const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
