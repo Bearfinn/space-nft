@@ -29,8 +29,21 @@ export const useRefinery = () => {
     params: { "": account },
   });
 
+
+  const {
+    data: calculatedRefinery,
+    fetch: calculateRefinery,
+  } = useWeb3ExecuteFunction({
+    contractAddress: CONTRACTS["SNFT"][chainId],
+    functionName: "userRefinery",
+    abi: SNFTABI,
+    params: { "": account },
+  });
+
   const refinery = useMemo<RefineryInfo | null>(() => {
     if (!refineryInfo) return null;
+    if (!calculatedRefinery) return null;
+    const { mineralSpenditure, production } = calculatedRefinery as any;
     const {
       consumePerSecond,
       productionPerSecond,
@@ -40,10 +53,10 @@ export const useRefinery = () => {
     return {
       consumePerSecond: Moralis.Units.FromWei(consumePerSecond),
       productionPerSecond: Moralis.Units.FromWei(productionPerSecond),
-      waitingToClaim: Moralis.Units.FromWei(waitingToClaim),
+      waitingToClaim: Number(Moralis.Units.FromWei(waitingToClaim)) + Number(Moralis.Units.FromWei(production)),
       lastUpdateTime: new Date(Moralis.Units.FromWei(lastUpdateTime, 0)),
     };
-  }, [Moralis.Units, refineryInfo]);
+  }, [Moralis.Units, refineryInfo, calculatedRefinery]);
 
   useEffect(() => {
     getRefineryInfo().then(() => {
