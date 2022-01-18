@@ -33,9 +33,16 @@ export const useShop = () => {
     abi: SNFTABI,
   });
 
+  const getFreeShip = useExecuteFunction<{ _amount: number }>({
+    contractAddress: CONTRACTS["SNFT"][chainId],
+    functionName: "createTestShipForFree",
+    abi: SNFTABI,
+  });
+
   return {
     buyBoosterPack,
     buyGRB,
     buyFuel,
+    getFreeShip,
   };
 };

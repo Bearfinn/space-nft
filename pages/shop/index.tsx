@@ -5,7 +5,7 @@ import { FunctionComponent } from "react";
 interface ShopPageProps {}
 
 const ShopPage: FunctionComponent<ShopPageProps> = () => {
-  const { buyBoosterPack, buyGRB, buyFuel } = useShop();
+  const { buyBoosterPack, buyGRB, buyFuel, getFreeShip } = useShop();
   return (
     <div className="container mx-auto max-w-4xl">
       <div className="text-4xl font-mono mt-8">Shop</div>
@@ -40,6 +40,14 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
             description="More items!"
             action="Buy with GRB"
             onClick={() => {}}
+          ></ShopCard>
+        </div>
+        <div className="col-span-1">
+          <ShopCard
+            title="Free Ship!"
+            description="(Testnet Only)"
+            action="Get for free"
+            onClick={() => getFreeShip()}
           ></ShopCard>
         </div>
       </div>
