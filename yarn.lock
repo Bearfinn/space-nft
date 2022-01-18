@@ -1422,6 +1422,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@metamask/detect-provider@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@metamask/detect-provider/-/detect-provider-1.2.0.tgz#3667a7531f2a682e3c3a43eaf3a1958bdb42a696"
+  integrity sha512-ocA76vt+8D0thgXZ7LxFPyqw3H7988qblgzddTDA6B8a/yU0uKV42QR/DhA+Jh11rJjxW0jKvwb5htA6krNZDQ==
+
 "@next/env@12.0.8":
   version "12.0.8"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.0.8.tgz#a32ca0a97d464307f2e6ff106ce09b19aac108cf"
@@ -2087,7 +2092,12 @@ core-js-compat@^3.20.0, core-js-compat@^3.20.2:
     browserslist "^4.19.1"
     semver "7.0.0"
 
-core-js-pure@^3.19.0, core-js-pure@^3.20.2:
+core-js-pure@^3.19.0:
+  version "3.20.3"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.20.3.tgz#6cc4f36da06c61d95254efc54024fe4797fd5d02"
+  integrity sha512-Q2H6tQ5MtPtcC7f3HxJ48i4Q7T9ybPKgvWyuH7JXIoNa2pm0KuBnycsET/qw1SLLZYfbsbrZQNMeIOClb+6WIA==
+
+core-js-pure@^3.20.2:
   version "3.20.2"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.20.2.tgz#5d263565f0e34ceeeccdc4422fae3e84ca6b8c0f"
   integrity sha512-CmWHvSKn2vNL6p6StNp1EmMIfVY/pqn3JLAjfZQ8WZGPOlGoO92EkX9/Mk81i6GxvoPXjUqEQnpM3rJ5QxxIOg==
@@ -3237,13 +3247,14 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
-moralis@^1.0.0-beta.7:
-  version "1.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/moralis/-/moralis-1.0.0-beta.7.tgz#184090539140e6c997af9f17ebb0c5ae5755f7e3"
-  integrity sha512-gEQovrSOsFFoc++9+p4Wxzns7ZrRAGKfPtUNkiVm3gbRtd/MRMh2R/3+WH7toYtCZziDlZD4nfM08IzIxhnVwQ==
+moralis@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/moralis/-/moralis-1.0.1.tgz#b942145a0b59026f1934d7e35a279cf45a500241"
+  integrity sha512-m8WFv0Ra25X4aMAAACVbyJnZNDKpx/Kt8WMcwbszHwJE3+tg58TB8XGqn8xEQGyuq9Kle0E+gQ9XpCknLHLX4Q==
   dependencies:
     "@babel/runtime" "7.16.5"
     "@babel/runtime-corejs3" "7.16.5"
+    "@metamask/detect-provider" "^1.2.0"
     axios "0.24.0"
     ethers "5.5.1"
     react-native-crypto-js "1.0.0"
@@ -3610,10 +3621,10 @@ react-merge-refs@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
-react-moralis@^1.0.0-beta.3:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-moralis/-/react-moralis-1.0.0-beta.3.tgz#9284df48f17d8cc35d6b952b4ddb3a747c105ef6"
-  integrity sha512-ZtwKwZCGtL65fWJW0ewJ/PExNGqM2ratGdolHMppBpVGq7IYAZQnTeD1yDVtm8nIFvoQ9PWcUZ4+ELG+wI71jw==
+react-moralis@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-moralis/-/react-moralis-1.0.0.tgz#490568bbd3c701e9fb3fce693be481cc09f772b5"
+  integrity sha512-9EEFV1QrS1EilFB8dgmCKP68CNgsyOUqS+XvFQdSWb4I3t8g+TKq/3UbcC32QnkQ9GtC7CeLtlh9G+YIvTRRmw==
   dependencies:
     fast-deep-equal "^3.1.3"
     immer "^9.0.7"
