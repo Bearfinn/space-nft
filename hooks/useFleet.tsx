@@ -1,13 +1,10 @@
 import SNFTABI from "constants/abi/SNFT.json";
 import { CONTRACTS } from "constants/contracts";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   useChain,
-  useMoralis,
-  useMoralisFile,
-  useWeb3ExecuteFunction,
+  useMoralis, useWeb3ExecuteFunction
 } from "react-moralis";
-import { Fleet } from "types/Items";
 import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useFleet = () => {
@@ -18,16 +15,16 @@ export const useFleet = () => {
     [chainIdHex]
   );
 
-  const { data: fleets, fetch: getFleets, error } = useWeb3ExecuteFunction({
+  const { data: fleetTokenIds, fetch: getFleets } = useWeb3ExecuteFunction({
     contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "userFleet",
+    functionName: "getUserFleet",
     abi: SNFTABI,
-    params: { address: account, id: 0 },
+    params: { _user: account },
   });
 
   useEffect(() => {
     getFleets()
-  }, [Moralis.Units, account, getFleets])
+  }, [account, getFleets])
 
   const addShipToFleet = useExecuteFunction<{ _tokenId: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],
@@ -42,6 +39,7 @@ export const useFleet = () => {
   });
 
   return {
+    fleetTokenIds: fleetTokenIds as any[],
     addShipToFleet,
     removeShipFromFleet,
   };

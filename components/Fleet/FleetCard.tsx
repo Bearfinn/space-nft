@@ -1,16 +1,17 @@
 import Button from "components/base/Button";
 import { useFleet } from "hooks/useFleet";
 import Image from "next/image";
+import Link from "next/link";
 import { FunctionComponent } from "react";
 import { Fleet } from "types/Items";
 import FleetProperty from "./FleetProperty";
 
 interface FleetCardProps {
-  ship: Fleet;
+  ship: Fleet | null;
 }
 
 const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
-  const { addShipToFleet } = useFleet()
+  const { addShipToFleet } = useFleet();
 
   return ship ? (
     <div className="rounded-lg bg-stone-900 bg-opacity-75 w-72 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
@@ -31,13 +32,24 @@ const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
       </div>
       <div className="bg-stone-800">
         <div className="flex justify-between mt-6">
-          <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>To Fleet</Button>
+          <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>
+            To Fleet
+          </Button>
           <Button>Sell</Button>
         </div>
       </div>
     </div>
   ) : (
-    <div>Loading...</div>
+    <Link href="/inventory" passHref>
+      <div className="rounded-lg bg-stone-900 cursor-pointer bg-opacity-75 w-72 h-[420px] hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center text-teal-300">
+            <div className="text-4xl">+</div>
+            <div>Add ship to fleet</div>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 };
 
