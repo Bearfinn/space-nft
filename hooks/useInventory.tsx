@@ -19,8 +19,6 @@ export const useNFTs = () => {
     }
   );
 
-  console.log(data)
-
   useEffect(() => {
     const getNfts = async () => {
       if (!data || !data.result) return [];

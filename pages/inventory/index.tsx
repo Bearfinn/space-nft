@@ -1,5 +1,4 @@
 import FleetCard from "components/Fleet/FleetCard";
-import { useFleet } from "hooks/useFleet";
 import { useNFTs } from "hooks/useInventory";
 import { FunctionComponent } from "react";
 import { Fleet } from "types/Items";
@@ -19,7 +18,6 @@ const fleet: Fleet = {
 
 const FleetPage: FunctionComponent<FleetPageProps> = () => {
   const { nfts } = useNFTs();
-  console.log(nfts);
 
   return (
     <div className="container max-w-2xl mx-auto">
