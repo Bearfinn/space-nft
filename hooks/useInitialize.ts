@@ -6,6 +6,7 @@ import { useExecuteFunction } from "./useExecuteFunction";
 export const useInitialize = () => {
   const { account } = useMoralis();
   const { contractAddress, abi } = useContract("SNFT");
+
   const { data: isUserInitialized, fetch: getUserInitialized, error } =
     useWeb3ExecuteFunction({
       contractAddress,
