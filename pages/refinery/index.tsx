@@ -3,10 +3,12 @@ import { useRefinery } from "hooks/useRefinery";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import Icon from "components/base/Icon";
+import { useNFTs } from "hooks/useInventory";
 
 interface RefineryPageProps {}
 
 const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
+  const { mineral } = useNFTs()
   const { refineryInfo, upgradeRefinery, claimRefinery } = useRefinery();
   return (
     <div className="container mx-auto max-w-4xl">
@@ -34,7 +36,8 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Mineral Consumption
               </div>
               <div className="mt-1 font-mono">
-                -{refineryInfo?.consumePerSecond} <Icon type="MINERAL" />/s
+                -{refineryInfo?.consumePerSecond} <Icon type="MINERAL" />
+                /s
               </div>
             </div>
             <div className="mt-8">
@@ -42,7 +45,8 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Crystal Production
               </div>
               <div className="mt-1 font-mono">
-                {refineryInfo?.productionPerSecond} <Icon type="CRYSTAL" />/s
+                {refineryInfo?.productionPerSecond} <Icon type="CRYSTAL" />
+                /s
               </div>
             </div>
           </div>
@@ -55,6 +59,14 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
             </Button>
           </div>
           <div className="flex gap-4 items-center text-right">
+            <div className="">
+              <div className="text-stone-500 uppercase text-xs">
+                Est. Remaining
+              </div>
+              <div className="mt-1 font-mono">
+                {mineral - (refineryInfo?.mineralSpenditure || 0)} <Icon type="MINERAL" />
+              </div>
+            </div>
             <div className="">
               <div className="text-stone-500 uppercase text-xs">
                 Available for Claim
