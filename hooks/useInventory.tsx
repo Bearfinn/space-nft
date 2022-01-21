@@ -45,7 +45,7 @@ export const useNFTs = () => {
           setCrystal(Number(Moralis.Units.FromWei(nft.amount || "0")));
         }
         if (tokenId === 2) {
-          setFuel(Number(Moralis.Units.FromWei(nft.amount || "0")));
+          setFuel(Number(nft.amount || "0"));
         }
 
         // Avatars
