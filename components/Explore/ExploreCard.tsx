@@ -3,9 +3,21 @@ import Icon from "components/base/Icon";
 import Image from "next/image";
 import { FunctionComponent } from "react";
 
-interface ExploreCardProps {}
+interface ExploreCardProps {
+  name: string;
+  distance: number;
+  difficulty: string;
+  duration: number;
+  onExplore: () => void;
+}
 
-const ExploreCard: FunctionComponent<ExploreCardProps> = () => {
+const ExploreCard: FunctionComponent<ExploreCardProps> = ({
+  name,
+  distance,
+  difficulty,
+  duration,
+  onExplore,
+}) => {
   return (
     <div className="bg-stone-900 bg-opacity-75 mt-8">
       <div className="grid grid-cols-12 p-8 items-center">
@@ -19,25 +31,27 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = () => {
           ></Image>
         </div>
         <div className="col-span-9">
-          <div className="text-xl">Burrius</div>
+          <div className="text-xl uppercase">{name}</div>
           <div className="grid grid-cols-3">
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
                 Distance
               </div>
-              <div className="mt-1 font-mono">500 Lightyear</div>
+              <div className="mt-1 font-mono">
+                {distance} Lightyear{distance > 1 && "s"}
+              </div>
             </div>
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
                 Minimum Duration
               </div>
-              <div className="mt-1 font-mono">300 Seconds</div>
+              <div className="mt-1 font-mono">{duration} Seconds</div>
             </div>
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
                 Difficulty
               </div>
-              <div className="mt-1 font-mono">Easy</div>
+              <div className="mt-1 font-mono uppercase">{difficulty}</div>
             </div>
           </div>
         </div>
@@ -47,7 +61,7 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = () => {
         <div className=""></div>
         <div className="flex gap-4 items-center text-right">
           <div className="">
-            <Button onClick={() => {}}>Explore</Button>
+            <Button onClick={() => onExplore()}>Explore</Button>
           </div>
         </div>
       </div>
