@@ -1,5 +1,3 @@
-import SNFTABI from "constants/abi/SNFT.json";
-import { CONTRACTS } from "constants/contracts";
 import { useEffect, useMemo } from "react";
 import {
   useChain,
@@ -49,7 +47,7 @@ export const useShip = () => {
   });
 
   return {
-    fleetTokenIds: fleetTokenIds as any[],
+    fleetTokenIds: (fleetTokenIds as any[] || [])?.map((fleetTokenId: any) => fleetTokenId.toNumber()),
     addShipToFleet,
     removeShipFromFleet,
     upgradeShip,

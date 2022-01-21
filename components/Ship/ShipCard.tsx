@@ -11,12 +11,19 @@ interface ShipCardProps {
 }
 
 const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
-  const { addShipToFleet, upgradeShip } = useShip();
+  const { addShipToFleet, removeShipFromFleet, upgradeShip, fleetTokenIds } =
+    useShip();
 
   const initialStats = useMemo(() => {
     return [0, 0, 0, 0];
   }, []);
   const [stats, setStats] = useState(initialStats);
+
+  const isInFleet = useMemo(() => {
+    return fleetTokenIds.includes(ship?.tokenId);
+  }, [fleetTokenIds, ship?.tokenId]);
+
+  console.log(fleetTokenIds);
 
   const updateStats = (index: number, amount: number) => {
     setStats((prevStats) => {
@@ -45,7 +52,11 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
           </div>
         </div>
         <div className="px-8">
-          <div className="text-xl my-4 uppercase">{ship.name}</div>
+          <div className="text-xl my-4 uppercase">{ship.name}
+          {isInFleet && (
+            <span className="ml-2 bg-teal-300 text-stone-900 rounded p-2 text-xs font-medium">On Fleet</span>
+          )}
+          </div>
           <div className="divide-y divide-slate-700">
             <FleetProperty
               name="HP"
@@ -98,10 +109,18 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
           </div>
         )}
         <div className="flex justify-between">
-          <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>
-            To Fleet
-          </Button>
-          <Button>Sell</Button>
+          {isInFleet ? (
+            <Button
+              onClick={() => removeShipFromFleet({ _tokenId: ship.tokenId })}
+            >
+              Remove from Fleet
+            </Button>
+          ) : (
+            <Button onClick={() => addShipToFleet({ _tokenId: ship.tokenId })}>
+              To Fleet
+            </Button>
+          )}
+          <Button className="text-gray-400 px-4 cursor-cursor">Sell</Button>
         </div>
       </div>
     </div>
