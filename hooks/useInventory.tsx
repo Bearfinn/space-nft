@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
+import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall, useNFTBalances } from "react-moralis";
 import { Fleet, IShipMetadata } from "types/Items";
 
 export const useNFTs = () => {
@@ -9,15 +9,14 @@ export const useNFTs = () => {
   const [fuel, setFuel] = useState(0);
   const [nfts, setNfts] = useState<any[]>([]);
 
-  const { Moralis } = useMoralis()
-  const { data, error, fetch, isFetching, isLoading } = useMoralisWeb3ApiCall(
-    Web3Api.account.getNFTsForContract,
-    {
-      chain: "avalanche testnet",
-      address: "0xc437F7d1Ba3f0479A67E3198e2ce7f66d6cAeD25",
-      token_address: "0x7158f977a8fE672e026C8c69a82CD2935aF055Ac",
-    }
-  );
+  const { account, Moralis } = useMoralis()
+
+  const { data, error } = useNFTBalances({
+    chain: "avalanche testnet",
+    token_addresses: [
+      "0x7158f977a8fE672e026C8c69a82CD2935aF055Ac",
+    ]
+  })
 
   useEffect(() => {
     const getNfts = async () => {
@@ -98,11 +97,7 @@ export const useNFTs = () => {
       setNfts(ships);
     };
     getNfts();
-  }, [Moralis.Units, data]);
-
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
+  }, [Moralis.Units, data, account]);
 
   return {
     nfts,
