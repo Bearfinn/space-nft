@@ -1,20 +1,21 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall, useNFTBalances } from "react-moralis";
 import { Fleet, IShipMetadata } from "types/Items";
+import { useContract } from "./useContract";
 
 export const useNFTs = () => {
-  const Web3Api = useMoralisWeb3Api();
   const [mineral, setMineral] = useState(0);
   const [crystal, setCrystal] = useState(0);
   const [fuel, setFuel] = useState(0);
   const [nfts, setNfts] = useState<any[]>([]);
 
   const { account, Moralis } = useMoralis()
+  const { contractAddress } = useContract("SNFT");
 
-  const { data, error } = useNFTBalances({
+  const { data } = useNFTBalances({
     chain: "avalanche testnet",
     token_addresses: [
-      "0x7158f977a8fE672e026C8c69a82CD2935aF055Ac",
+      contractAddress,
     ]
   })
 
