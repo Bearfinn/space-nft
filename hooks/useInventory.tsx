@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { useMoralis, useMoralisWeb3Api, useMoralisWeb3ApiCall, useNFTBalances } from "react-moralis";
+import {
+  useMoralis,
+  useMoralisWeb3Api,
+  useMoralisWeb3ApiCall,
+  useNFTBalances,
+} from "react-moralis";
 import { Fleet, IShipMetadata } from "types/Items";
 import { useContract } from "./useContract";
+import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useNFTs = () => {
   const [mineral, setMineral] = useState(0);
@@ -9,15 +15,13 @@ export const useNFTs = () => {
   const [fuel, setFuel] = useState(0);
   const [nfts, setNfts] = useState<any[]>([]);
 
-  const { account, Moralis } = useMoralis()
-  const { contractAddress } = useContract("SNFT");
+  const { account, Moralis } = useMoralis();
+  const { contractAddress, abi } = useContract("SNFT");
 
   const { data } = useNFTBalances({
     chain: "avalanche testnet",
-    token_addresses: [
-      contractAddress,
-    ]
-  })
+    token_addresses: [contractAddress],
+  });
 
   useEffect(() => {
     const getNfts = async () => {
@@ -74,11 +78,13 @@ export const useNFTs = () => {
 
         // Ships
         if (tokenId >= 34) {
-          const ship: IShipMetadata = metadata.result
+          const ship: IShipMetadata = metadata.result;
           const getAttributes = (traitType: string) => {
-            const attribute = ship.attributes.find((attribute) => attribute.trait_type === traitType)
-            return attribute?.value || null
-          }
+            const attribute = ship.attributes.find(
+              (attribute) => attribute.trait_type === traitType
+            );
+            return attribute?.value || null;
+          };
           ships.push({
             tokenId,
             amount: parseInt(nft.amount || "0"),
@@ -89,7 +95,7 @@ export const useNFTs = () => {
             hp: getAttributes("Hit Point"),
             attack: getAttributes("Attack"),
             travelSpeed: getAttributes("Travel Speed"),
-            miningSpeed: getAttributes("Mining Speed")
+            miningSpeed: getAttributes("Mining Speed"),
           } as Fleet);
         }
       });

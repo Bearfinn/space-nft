@@ -5,6 +5,7 @@ import {
   useChain,
   useMoralis, useWeb3ExecuteFunction
 } from "react-moralis";
+import { useContract } from "./useContract";
 import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useFleet = () => {
@@ -14,11 +15,11 @@ export const useFleet = () => {
     () => parseInt(chainIdHex || "", 16).toString() as "43113",
     [chainIdHex]
   );
+  const nftContract = useContract("SNFT")
 
   const { data: fleetTokenIds, fetch: getFleets } = useWeb3ExecuteFunction({
-    contractAddress: CONTRACTS["SNFT"][chainId],
+    ...nftContract,
     functionName: "getUserFleet",
-    abi: SNFTABI,
     params: { _user: account },
   });
 
@@ -27,20 +28,30 @@ export const useFleet = () => {
   }, [account, getFleets])
 
   const addShipToFleet = useExecuteFunction<{ _tokenId: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
+    ...nftContract,
     functionName: "addShipToFleet",
-    abi: SNFTABI,
   });
 
   const removeShipFromFleet = useExecuteFunction<{ _tokenId: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
+    ...nftContract,
     functionName: "removeShipFromFleet",
-    abi: SNFTABI,
+  });
+
+  const upgradeShip = useExecuteFunction<{
+    _tokenId: number;
+    hpUpgradeCount: number;
+    attackUpgradeCount: number;
+    miningUpgradeCount: number;
+    travelUpgradeCount: number;
+  }>({
+    ...nftContract,
+    functionName: "upgradeShip",
   });
 
   return {
     fleetTokenIds: fleetTokenIds as any[],
     addShipToFleet,
     removeShipFromFleet,
+    upgradeShip,
   };
 };
