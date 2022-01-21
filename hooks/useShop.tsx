@@ -23,7 +23,7 @@ export const useShop = () => {
 
   const buyGRB = useExecuteFunction<{ _amountGRB: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "buyFuel",
+    functionName: "buyGRB",
     abi: SNFTABI,
   });
 

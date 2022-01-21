@@ -24,4 +24,5 @@ export interface RefineryInfo {
   productionPerSecond: number;
   consumePerSecond: number;
   lastUpdateTime: Date;
+  mineralSpenditure: number;
 }

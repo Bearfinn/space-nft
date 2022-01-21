@@ -29,13 +29,12 @@ export const useRefinery = () => {
     params: { "": account },
   });
 
-
   const {
     data: calculatedRefinery,
     fetch: calculateRefinery,
   } = useWeb3ExecuteFunction({
     contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "userRefinery",
+    functionName: "calculateRefinery",
     abi: SNFTABI,
     params: { "": account },
   });
@@ -43,7 +42,8 @@ export const useRefinery = () => {
   const refinery = useMemo<RefineryInfo | null>(() => {
     if (!refineryInfo) return null;
     if (!calculatedRefinery) return null;
-    const { mineralSpenditure, production } = calculatedRefinery as any;
+    const [mineralSpenditure, production] = calculatedRefinery as any;
+
     const {
       consumePerSecond,
       productionPerSecond,
@@ -55,14 +55,14 @@ export const useRefinery = () => {
       productionPerSecond: Moralis.Units.FromWei(productionPerSecond),
       waitingToClaim: Number(Moralis.Units.FromWei(waitingToClaim)) + Number(Moralis.Units.FromWei(production)),
       lastUpdateTime: new Date(Moralis.Units.FromWei(lastUpdateTime, 0)),
+      mineralSpenditure: Number(Moralis.Units.FromWei(mineralSpenditure)),
     };
   }, [Moralis.Units, refineryInfo, calculatedRefinery]);
 
   useEffect(() => {
-    getRefineryInfo().then(() => {
-      console.error(error);
-    });
-  }, [Moralis.Units, account, getRefineryInfo]);
+    getRefineryInfo()
+    calculateRefinery()
+  }, [Moralis.Units, account, calculateRefinery, getRefineryInfo]);
 
   const upgradeRefinery = useExecuteFunction<{ upgradeCount: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],
