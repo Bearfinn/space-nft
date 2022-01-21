@@ -23,8 +23,6 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
     return fleetTokenIds.includes(ship?.tokenId);
   }, [fleetTokenIds, ship?.tokenId]);
 
-  console.log(fleetTokenIds);
-
   const updateStats = (index: number, amount: number) => {
     setStats((prevStats) => {
       const newStats = { ...prevStats };

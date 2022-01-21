@@ -42,7 +42,6 @@ export const useExecuteFunction = <ExecuteFunctionParams>({
           isLoading: false,
           autoClose: 5000,
         });
-        console.log(txReceipt);
       } catch (error: any) {
         toast.update(toastId, {
           type: "error",

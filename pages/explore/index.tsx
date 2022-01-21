@@ -6,12 +6,6 @@ import { generateScientificNames } from "utils/generator";
 import dayjs from "utils/dayjs";
 
 const ExplorePage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleObjectiveClick = (distance: number) => {
-    console.log(distance);
-    setIsOpen(true);
-  };
-
   const names = useMemo(() => generateScientificNames(5), []);
 
   const fleetPower: [number, number, number, number, number] = [0, 0, 0, 1, 0];
@@ -43,7 +37,6 @@ const ExplorePage = () => {
   const [timer, setTimer] = useState<string | null>("");
   const [isCompleted, setIsCompleted] = useState(false);
   useEffect(() => {
-    console.log(explorationStatus);
     const timer = setInterval(() => {
       const remainingTime =
         explorationStatus &&
