@@ -1,13 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  useMoralis,
-  useMoralisWeb3Api,
-  useMoralisWeb3ApiCall,
-  useNFTBalances,
+  useMoralis, useNFTBalances
 } from "react-moralis";
-import { Fleet, IShipMetadata } from "types/Items";
+import { IShipMetadata, Ship } from "types/Items";
 import { useContract } from "./useContract";
-import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useNFTs = () => {
   const [mineral, setMineral] = useState(0);
@@ -96,7 +92,7 @@ export const useNFTs = () => {
             attack: getAttributes("Attack"),
             travelSpeed: getAttributes("Travel Speed"),
             miningSpeed: getAttributes("Mining Speed"),
-          } as Fleet);
+          } as Ship);
         }
       });
 

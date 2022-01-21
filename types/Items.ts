@@ -8,7 +8,7 @@ export interface IShipMetadata {
   name: string;
 }
 
-export interface Fleet {
+export interface Ship {
   tokenId: number;
   src: string;
   name: string;

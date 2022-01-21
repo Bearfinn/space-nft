@@ -8,7 +8,7 @@ import {
 import { useContract } from "./useContract";
 import { useExecuteFunction } from "./useExecuteFunction";
 
-export const useFleet = () => {
+export const useShip = () => {
   const { account, Moralis } = useMoralis();
   const { chainId: chainIdHex } = useChain();
   const chainId = useMemo(

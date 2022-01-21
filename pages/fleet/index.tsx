@@ -1,35 +1,24 @@
-import FleetCard from "components/Fleet/FleetCard";
+import FleetCard from "components/Ship/ShipCard";
 import { useContract } from "hooks/useContract";
-import { useFleet } from "hooks/useFleet";
+import { useShip } from "hooks/useShip";
 import { useNFTs } from "hooks/useInventory";
 import { FunctionComponent, useEffect, useCallback, useState } from "react";
 import { useMoralis } from "react-moralis";
-import { Fleet, IShipMetadata } from "types/Items";
+import { Ship, IShipMetadata } from "types/Items";
 
 interface FleetPageProps {}
 
-const fleet: Fleet = {
-  tokenId: 1,
-  src: "/sprites/battleship1.png",
-  hp: 120,
-  name: "Fleet",
-  type: "A",
-  attack: 0,
-  travelSpeed: 0,
-  miningSpeed: 0,
-};
-
 const FleetPage: FunctionComponent<FleetPageProps> = () => {
-  const { fleetTokenIds } = useFleet();
+  const { fleetTokenIds } = useShip();
   const { nfts } = useNFTs();
-  const [fleets, setFleets] = useState<(Fleet | null)[]>([]);
+  const [fleets, setFleets] = useState<(Ship | null)[]>([]);
 
   const { contractAddress } = useContract("SNFT");
   const { account, Moralis } = useMoralis();
 
   const getFleets = useCallback(async () => {
     let index = 0;
-    const fleets: (Fleet | null)[] = [null, null, null, null];
+    const fleets: (Ship | null)[] = [null, null, null, null];
 
     for (const _ of fleets) {
       const fleetTokenId = fleetTokenIds[index];
@@ -73,7 +62,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
           attack: getAttributes("Attack"),
           travelSpeed: getAttributes("Travel Speed"),
           miningSpeed: getAttributes("Mining Speed"),
-        } as Fleet;
+        } as Ship;
       } else {
         fleets[index] = null;
       }

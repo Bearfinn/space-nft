@@ -1,4 +1,4 @@
-import FleetCard from "components/Fleet/FleetCard";
+import FleetCard from "components/Ship/ShipCard";
 import { useNFTs } from "hooks/useInventory";
 import { FunctionComponent } from "react";
 

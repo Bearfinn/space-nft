@@ -1,17 +1,17 @@
 import Button from "components/base/Button";
-import { useFleet } from "hooks/useFleet";
+import { useShip } from "hooks/useShip";
 import Image from "next/image";
 import Link from "next/link";
 import { FunctionComponent, useMemo, useState } from "react";
-import { Fleet } from "types/Items";
-import FleetProperty from "./FleetProperty";
+import { Ship } from "types/Items";
+import FleetProperty from "./ShipProperty";
 
-interface FleetCardProps {
-  ship: Fleet | null;
+interface ShipCardProps {
+  ship: Ship | null;
 }
 
-const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
-  const { addShipToFleet, upgradeShip } = useFleet();
+const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
+  const { addShipToFleet, upgradeShip } = useShip();
 
   const initialStats = useMemo(() => {
     return [0, 0, 0, 0];
@@ -119,4 +119,4 @@ const FleetCard: FunctionComponent<FleetCardProps> = ({ ship }) => {
   );
 };
 
-export default FleetCard;
+export default ShipCard;
