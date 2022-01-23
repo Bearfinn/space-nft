@@ -1,0 +1,222 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 917,
+      "type": "VEC3",
+      "max": [
+        5.9633727073669434,
+        2.5720093250274658,
+        6.513124942779541
+      ],
+      "min": [
+        -5.96337366104126,
+        -2.5720105171203613,
+        -6.513124942779541
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 917,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 917,
+      "type": "VEC4",
+      "max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 917,
+      "type": "VEC2",
+      "max": [
+        0.99730002880096436,
+        0.99879997968673706
+      ],
+      "min": [
+        0.001500000013038516,
+        0.0062000155448913574
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 2658,
+      "type": "SCALAR",
+      "max": [
+        916.0
+      ],
+      "min": [
+        0.0
+      ]
+    }
+  ],
+  "asset": {
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "scout6.bin",
+      "byteLength": 49332
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 11004
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 11004,
+      "byteLength": 11004
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 22008,
+      "byteLength": 14672
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 36680,
+      "byteLength": 7336
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 44016,
+      "byteLength": 5316
+    }
+  ],
+  "images": [
+    {
+      "uri": "StarSparrow_Emission.png",
+      "name": "StarSparrow_Emission"
+    },
+    {
+      "uri": "StarSparrow_Normal.png",
+      "name": "StarSparrow_Normal"
+    },
+    {
+      "uri": "StarSparrow_White.png",
+      "name": "StarSparrow_White"
+    },
+    {
+      "uri": "StarSparrow_MetallicSmoothness.png",
+      "name": "StarSparrow_MetallicSmoothness"
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5,
+        "metallicRoughnessTexture": {
+          "index": 3
+        }
+      },
+      "normalTexture": {
+        "index": 1
+      },
+      "emissiveTexture": {
+        "index": 0
+      },
+      "emissiveFactor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "name": "StarSparrow_White"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ],
+      "name": "scout6"
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "name": "scout6"
+    }
+  ],
+  "samplers": [
+    {}
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "scout6"
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0,
+      "name": "StarSparrow_Emission"
+    },
+    {
+      "sampler": 0,
+      "source": 1,
+      "name": "StarSparrow_Normal"
+    },
+    {
+      "sampler": 0,
+      "source": 2,
+      "name": "StarSparrow_White"
+    },
+    {
+      "sampler": 0,
+      "source": 3,
+      "name": "StarSparrow_MetallicSmoothness"
+    }
+  ]
+}

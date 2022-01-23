@@ -1,0 +1,222 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 1277,
+      "type": "VEC3",
+      "max": [
+        5.9727926254272461,
+        0.74784988164901733,
+        6.5588574409484863
+      ],
+      "min": [
+        -5.9727926254272461,
+        -0.74786520004272461,
+        -6.5588574409484863
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 1277,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 1277,
+      "type": "VEC4",
+      "max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 1277,
+      "type": "VEC2",
+      "max": [
+        0.99730002880096436,
+        0.996399998664856
+      ],
+      "min": [
+        0.001500000013038516,
+        0.0062000155448913574
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 3738,
+      "type": "SCALAR",
+      "max": [
+        1276.0
+      ],
+      "min": [
+        0.0
+      ]
+    }
+  ],
+  "asset": {
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "defender3.bin",
+      "byteLength": 68772
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 15324
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 15324,
+      "byteLength": 15324
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 30648,
+      "byteLength": 20432
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 51080,
+      "byteLength": 10216
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 61296,
+      "byteLength": 7476
+    }
+  ],
+  "images": [
+    {
+      "uri": "StarSparrow_Emission.png",
+      "name": "StarSparrow_Emission"
+    },
+    {
+      "uri": "StarSparrow_Normal.png",
+      "name": "StarSparrow_Normal"
+    },
+    {
+      "uri": "StarSparrow_Yellow.png",
+      "name": "StarSparrow_Yellow"
+    },
+    {
+      "uri": "StarSparrow_MetallicSmoothness.png",
+      "name": "StarSparrow_MetallicSmoothness"
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.5,
+        "metallicRoughnessTexture": {
+          "index": 3
+        }
+      },
+      "normalTexture": {
+        "index": 1
+      },
+      "emissiveTexture": {
+        "index": 0
+      },
+      "emissiveFactor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "name": "StarSparrow_Yellow"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ],
+      "name": "defender3"
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "name": "defender3"
+    }
+  ],
+  "samplers": [
+    {}
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "defender3"
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0,
+      "name": "StarSparrow_Emission"
+    },
+    {
+      "sampler": 0,
+      "source": 1,
+      "name": "StarSparrow_Normal"
+    },
+    {
+      "sampler": 0,
+      "source": 2,
+      "name": "StarSparrow_Yellow"
+    },
+    {
+      "sampler": 0,
+      "source": 3,
+      "name": "StarSparrow_MetallicSmoothness"
+    }
+  ]
+}
