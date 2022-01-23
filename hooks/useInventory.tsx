@@ -81,7 +81,6 @@ export const useNFTs = () => {
             );
             return attribute?.value || null;
           };
-          console.log(ship)
           ships.push({
             tokenId,
             amount: parseInt(nft.amount || "0"),

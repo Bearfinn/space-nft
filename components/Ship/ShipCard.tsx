@@ -36,16 +36,17 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
     return !initialStats.every((stat, index) => stat === stats[index]);
   }, [initialStats, stats]);
 
+  /* eslint-disable @next/next/no-img-element */
   return ship ? (
     <div className="rounded-lg bg-stone-900 flex flex-col justify-between bg-opacity-75 w-72 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
       <div>
         <div className="rounded-t-lg relative">
-          <Image
+          <img
             src={ship.src}
             alt="Spaceship"
             width={360}
             height={200}
-          ></Image>
+          ></img>
           <div className="absolute top-3 right-3">
             <Button onClick={() => onInspect(ship)}>🔍</Button>
           </div>

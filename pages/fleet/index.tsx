@@ -62,6 +62,10 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
           attack: getAttributes("Attack"),
           travelSpeed: getAttributes("Travel Speed"),
           miningSpeed: getAttributes("Mining Speed"),
+          shipType: getAttributes("Ship Type"),
+          skinId: getAttributes("Skin Id"),
+          color: getAttributes("Color")
+          
         } as Ship;
       } else {
         fleets[index] = null;
@@ -84,7 +88,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
 
       <div className="grid grid-cols-2 gap-8">
         {fleets.map((ship, index) => {
-          return <FleetCard ship={ship} key={`ship-${index}`} />;
+          return <FleetCard ship={ship} key={`ship-${index}`} onInspect={() => {}} />;
         })}
       </div>
     </div>
