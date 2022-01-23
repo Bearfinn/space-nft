@@ -8,9 +8,10 @@ import FleetProperty from "./ShipProperty";
 
 interface ShipCardProps {
   ship: Ship | null;
+  onInspect: (ship: Ship) => void;
 }
 
-const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
+const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
   const { addShipToFleet, removeShipFromFleet, upgradeShip, fleetTokenIds } =
     useShip();
 
@@ -46,7 +47,7 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship }) => {
             height={200}
           ></Image>
           <div className="absolute top-3 right-3">
-            <Button>🔍</Button>
+            <Button onClick={() => onInspect(ship)}>🔍</Button>
           </div>
         </div>
         <div className="px-8">

@@ -17,6 +17,9 @@ export interface Ship {
   attack: number;
   travelSpeed: number;
   miningSpeed: number;
+  shipType: string;
+  skinId: number;
+  color: string;
 }
 
 export interface RefineryInfo {
