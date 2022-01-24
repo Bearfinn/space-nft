@@ -5,6 +5,7 @@ import {
   useChain,
   useMoralis, useWeb3ExecuteFunction
 } from "react-moralis";
+import { useContract } from "./useContract";
 import { useExecuteFunction } from "./useExecuteFunction";
 
 interface IExplorationStatus {
@@ -18,18 +19,13 @@ interface IExplorationStatus {
 }
 
 export const useExplore = () => {
-  const { account, Moralis } = useMoralis();
-  const { chainId: chainIdHex } = useChain();
-  const chainId = useMemo(
-    () => parseInt(chainIdHex || "", 16).toString() as "43113",
-    [chainIdHex]
-  );
+  const { account } = useMoralis();
+  const nftContract = useContract("SNFT")
 
   const { data: rawExplorationStatus, fetch: getExplorationStatus }: any = useWeb3ExecuteFunction({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "userExplorationStatus",
-    abi: SNFTABI,
     params: { "": account },
+    ...nftContract,
   });
 
   const explorationStatus = useMemo(() => {
@@ -50,15 +46,13 @@ export const useExplore = () => {
   }, [getExplorationStatus])
 
   const explore = useExecuteFunction<{ _distance: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "explore",
-    abi: SNFTABI,
+    ...nftContract,
   });
 
   const claimExploration = useExecuteFunction<{}>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "claimExploration",
-    abi: SNFTABI,
+    ...nftContract,
   });
 
   return {
