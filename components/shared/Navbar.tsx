@@ -39,22 +39,30 @@ const menuList = [
 const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
-  const { authenticate, isAuthenticated, user } = useMoralis();
   const router = useRouter();
 
   const { crystal, mineral, fuel } = useNFTs();
 
+  const { authenticate, isInitialized, isAuthenticated, user, enableWeb3 } =
+    useMoralis();
+
   const signIn = useCallback(() => {
     authenticate({
-      signingMessage: "Sign in to Space NFT",
+      signingMessage: "Sign in to the Game",
     });
   }, [authenticate]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isInitialized && !isAuthenticated) {
       signIn();
     }
-  }, [isAuthenticated, signIn]);
+  }, [isAuthenticated, isInitialized, signIn]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      enableWeb3();
+    }
+  }, [enableWeb3, isInitialized]);
 
   return (
     <div className="p-8 bg-black bg-opacity-75 flex justify-between sticky">
