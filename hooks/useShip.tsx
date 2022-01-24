@@ -1,3 +1,4 @@
+import Moralis from "moralis/types";
 import { useEffect, useMemo } from "react";
 import {
   useChain,
@@ -46,8 +47,13 @@ export const useShip = () => {
     functionName: "upgradeShip",
   });
 
+  const memoizedFleetTokenIds = useMemo(() => {
+    const tokenIds = (fleetTokenIds || []) as any[]
+    return tokenIds.map((tokenId: any) => tokenId.toNumber())
+  }, [fleetTokenIds])
+
   return {
-    fleetTokenIds: (fleetTokenIds as any[] || [])?.map((fleetTokenId: any) => fleetTokenId.toNumber()),
+    fleetTokenIds: memoizedFleetTokenIds,
     addShipToFleet,
     removeShipFromFleet,
     upgradeShip,

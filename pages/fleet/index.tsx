@@ -80,7 +80,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
     if (fleetTokenIds) {
       getFleets().then((fleets) => setFleets(fleets));
     }
-  }, [fleetTokenIds, getFleets, nfts]);
+  }, [fleetTokenIds, getFleets]);
 
   return (
     <div className="container max-w-2xl mx-auto mb-16">
