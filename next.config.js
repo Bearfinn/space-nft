@@ -2,20 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "bafybeidkgdepbsbdfgwcglkek3aus6fcsvvyhflcf3hxesxmyo2uafhrfe.ipfs.dweb.link",
-      "bafybeih4iuchjh3nqpsuirek7vekbznh5fn2ppc7icul4tqc4yampoqbei.ipfs.dweb.link",
-    ]
+    domains: [],
   },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
-    })
+      use: ["@svgr/webpack"],
+    });
 
-    return config
+    return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

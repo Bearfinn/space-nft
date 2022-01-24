@@ -1,13 +1,11 @@
 import SNFTABI from "constants/abi/SNFT.json";
 import { CONTRACTS } from "constants/contracts";
-import { Ref, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   useChain,
-  useMoralis,
-  useMoralisFile,
-  useWeb3ExecuteFunction,
+  useMoralis, useWeb3ExecuteFunction
 } from "react-moralis";
-import { Fleet, RefineryInfo } from "types/Items";
+import { RefineryInfo } from "types/Items";
 import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useRefinery = () => {
