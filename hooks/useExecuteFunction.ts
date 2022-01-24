@@ -38,7 +38,7 @@ export const useExecuteFunction = <ExecuteFunctionParams>({
         const txReceipt = await txResponse.wait();
         toast.update(toastId, {
           type: "success",
-          render: "Done",
+          render: "Transaction successful 🚀",
           isLoading: false,
           autoClose: 5000,
         });

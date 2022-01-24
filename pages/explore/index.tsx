@@ -5,8 +5,14 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import dayjs from "utils/dayjs";
 import { generateScientificNames } from "utils/generator";
+import {
+  encounterMessages,
+  EncounterType,
+  explorationMessages,
+  ExplorationType,
+} from "utils/text";
 
-const planets = generateScientificNames(5)
+const planets = generateScientificNames(5);
 
 const ExplorePage = () => {
   const fleetPower: [number, number, number, number, number] = [0, 0, 0, 1, 0];
@@ -26,6 +32,32 @@ const ExplorePage = () => {
     if (distance == 4 && fleetPower <= 1000) return "very hard";
     if (distance == 5) return "very hard";
     return "";
+  };
+
+  const getEncounterMessage = (
+    encounterType: EncounterType,
+    currentMissionFailed: boolean
+  ) => {
+    return encounterMessages.find(
+      (encounterMessage) =>
+        encounterMessage.type === encounterType &&
+        (encounterMessage.missionFailed === undefined
+          ? encounterMessage.missionFailed === currentMissionFailed
+          : true)
+    );
+  };
+
+  const getExplorationMessage = (
+    explorationType: ExplorationType,
+    currentMissionFailed: boolean
+  ) => {
+    return explorationMessages.find(
+      (encounterMessage) =>
+        encounterMessage.type === explorationType &&
+        (encounterMessage.missionFailed === undefined
+          ? encounterMessage.missionFailed === currentMissionFailed
+          : true)
+    );
   };
 
   const getDuration = (distance: number) => {
@@ -59,7 +91,9 @@ const ExplorePage = () => {
           <div className="p-4 col-span-12 flex items-center justify-between">
             <div>
               <div className="text-stone-500">Exploring</div>
-              <div className="text-2xl uppercase">{planets[explorationStatus?.currentExplorationDistance - 1]}</div>
+              <div className="text-2xl uppercase">
+                {planets[explorationStatus?.currentExplorationDistance - 1]}
+              </div>
             </div>
 
             <div className="flex gap-8">
@@ -71,28 +105,7 @@ const ExplorePage = () => {
                   {explorationStatus?.currentExplorationDistance} Lightyears
                 </div>
               </div>
-              {explorationStatus?.currentExplorationType > 0 && (
-                <div className="">
-                  <div className="text-stone-500 tracking-widest uppercase text-xs">
-                    Exploration Type
-                  </div>
-                  <div className="mt-1 font-mono">
-                    Type {explorationStatus?.currentExplorationType}
-                  </div>
-                </div>
-              )}
             </div>
-
-            {explorationStatus?.currentEncounterType > 0 && (
-              <div className="mt-8">
-                <div className="text-stone-500 tracking-widest uppercase text-xs">
-                  Exploration Type
-                </div>
-                <div className="mt-1 font-mono">
-                  Type {explorationStatus?.currentEncounterType}
-                </div>
-              </div>
-            )}
           </div>
 
           <div className="col-span-12 grid grid-cols-12 border-t border-stone-500 h-60 items-center">
@@ -105,16 +118,30 @@ const ExplorePage = () => {
               />
             </div>
             <div className="col-span-6">
-              {explorationStatus?.currentMissionFailed && (
-                <div className="text-red-500 text-center text-2xl border border-red-500 w-3/4 mx-auto p-4">
-                  Mission failed
-                </div>
-              )}
               {isCompleted ? (
-                <div className="flex justify-between bg-stone-900 border border-teal-300 my-8 rounded bg-opacity-75 items-center px-4 py-4">
-                  <div>Your exploration has completed.</div>
+                <div
+                  className={`text-center text-lg ${
+                    explorationStatus?.currentMissionFailed
+                      ? "text-red-500"
+                      : "text-teal-300"
+                  }`}
+                >
                   <div>
-                    <Button onClick={() => claimExploration()}>Claim</Button>
+                    {getExplorationMessage(
+                      explorationStatus.currentExplorationType,
+                      explorationStatus.currentMissionFailed
+                    )?.message}
+                  </div>
+                  <div>
+                    {getEncounterMessage(
+                      explorationStatus.currentEncounterType,
+                      explorationStatus.currentMissionFailed
+                    )?.message}
+                  </div>
+                  <div className="mt-4">
+                    <Button onClick={() => claimExploration()}>
+                      Finish Exploration
+                    </Button>
                   </div>
                 </div>
               ) : (
