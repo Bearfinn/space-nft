@@ -61,8 +61,8 @@ export const useExplore = () => {
 
   return {
     explorationStatus,
-    explore: async () => {
-      await explore()
+    explore: async ({ _distance }: any) => {
+      await explore({ _distance })
       await getExplorationStatus()
     },
     claimExploration: async () => {
