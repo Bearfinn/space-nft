@@ -34,6 +34,10 @@ const menuList = [
     name: "Shop",
     href: "/shop",
   },
+  {
+    name: "Download",
+    href: "https://cemleme.itch.io/grb-space-nft",
+  }
 ];
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
