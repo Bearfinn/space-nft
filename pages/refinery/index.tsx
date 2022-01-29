@@ -1,15 +1,17 @@
 import Button from "components/base/Button";
 import { useRefinery } from "hooks/useRefinery";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import Icon from "components/base/Icon";
 import { useNFTs } from "hooks/useNFTs";
+import { formatNumber } from "utils/format";
 
 interface RefineryPageProps {}
 
 const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
-  const { mineral } = useNFTs()
+  const { mineral } = useNFTs();
   const { refineryInfo, upgradeRefinery, claimRefinery } = useRefinery();
+  const [upgradeCount, setUpgradeCount] = useState(1);
   return (
     <div className="container mx-auto max-w-4xl">
       <div className="text-4xl font-mono mt-8">Refinery</div>
@@ -53,10 +55,28 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
         </div>
 
         <div className="flex justify-between px-4 py-4 bg-stone-900">
-          <div className="">
-            <Button onClick={() => upgradeRefinery({ upgradeCount: 1 })}>
+          <div className="flex">
+            <Button onClick={() => upgradeRefinery({ upgradeCount })}>
               Upgrade
             </Button>
+            <div>
+              <input
+                className="bg-black py-1 w-24 ml-2 text-right"
+                type="number"
+                value={upgradeCount}
+                min={1}
+                max={10}
+                step={1}
+                maxLength={2}
+                onChange={(e) => setUpgradeCount(Number(e.target.value))}
+              ></input>
+              <div className="text-sm text-center mt-2">
+                Cost: {upgradeCount}
+                <span className="ml-2">
+                  <Icon size={16} type="CRYSTAL" />
+                </span>
+              </div>
+            </div>
           </div>
           <div className="flex gap-4 items-center text-right">
             <div className="">
@@ -64,7 +84,8 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Est. Remaining
               </div>
               <div className="mt-1 font-mono">
-                {mineral - (refineryInfo?.mineralSpenditure || 0)} <Icon type="MINERAL" />
+                {formatNumber(mineral - (refineryInfo?.mineralSpenditure || 0))}{" "}
+                <Icon type="MINERAL" />
               </div>
             </div>
             <div className="">
@@ -72,7 +93,7 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Available for Claim
               </div>
               <div className="mt-1 font-mono">
-                {refineryInfo?.waitingToClaim} <Icon type="CRYSTAL" />
+                {formatNumber(refineryInfo?.waitingToClaim)} <Icon type="CRYSTAL" />
               </div>
             </div>
             <div className="">
