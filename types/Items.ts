@@ -29,3 +29,11 @@ export interface RefineryInfo {
   lastUpdateTime: Date;
   mineralSpenditure: number;
 }
+
+export interface GeneralNFT {
+  name: string;
+  description: string;
+  src: string;
+  skin?: number;
+  amount: number;
+}

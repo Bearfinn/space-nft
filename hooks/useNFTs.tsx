@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMoralis, useNFTBalances } from "react-moralis";
-import { IShipMetadata, Ship } from "types/Items";
+import { GeneralNFT, IShipMetadata, Ship } from "types/Items";
 import { useContract } from "./useContract";
 
 export const useNFTs = () => {
@@ -8,6 +8,9 @@ export const useNFTs = () => {
   const [crystal, setCrystal] = useState(0);
   const [fuel, setFuel] = useState(0);
   const [nfts, setNfts] = useState<any[]>([]);
+  const [lands, setLands] = useState<GeneralNFT[]>([]);
+  const [avatars, setAvatars] = useState<GeneralNFT[]>([]);
+  const [upgradeCards, setUpgradeCards] = useState<GeneralNFT[]>([]);
 
   const { account, Moralis } = useMoralis();
   const { contractAddress, abi } = useContract("SNFT");
@@ -21,10 +24,10 @@ export const useNFTs = () => {
     const getNfts = async () => {
       if (!data || !data.result) return [];
 
-      const avatars: any[] = [];
-      const lands: any[] = [];
-      const upgradeCards: any[] = [];
-      const ships: any[] = [];
+      const avatars: GeneralNFT[] = [];
+      const lands: GeneralNFT[] = [];
+      const upgradeCards: GeneralNFT[] = [];
+      const ships: Ship[] = [];
 
       const promises = data?.result
         .filter((nft) => {
@@ -53,24 +56,32 @@ export const useNFTs = () => {
           // Avatars
           if (tokenId >= 4 && tokenId <= 11) {
             avatars.push({
-              amount: parseInt(nft.amount || "0"),
               name: metadata.result.name,
+              description: metadata.result.description,
+              src: metadata.result.image,
+              skin: parseInt(metadata.result.skin || "0"),
+              amount: parseInt(nft.amount || "1"),
             });
           }
 
           // Lands
           if (tokenId >= 12 && tokenId <= 21) {
             lands.push({
-              amount: parseInt(nft.amount || "0"),
               name: metadata.result.name,
+              description: metadata.result.description,
+              src: metadata.result.image,
+              skin: parseInt(metadata.result.skin || "0"),
+              amount: parseInt(nft.amount || "1"),
             });
           }
 
           // Upgrade cards
           if (tokenId >= 22 && tokenId <= 33) {
             upgradeCards.push({
-              amount: parseInt(nft.amount || "0"),
               name: metadata.result.name,
+              description: metadata.result.description,
+              src: metadata.result.image,
+              amount: parseInt(nft.amount || "1"),
             });
           }
 
@@ -104,12 +115,18 @@ export const useNFTs = () => {
 
       await Promise.all(promises);
       setNfts(ships);
+      setAvatars(avatars);
+      setLands(lands);
+      setUpgradeCards(upgradeCards)
     };
     getNfts();
   }, [Moralis.Units, data, account, contractAddress]);
 
   return {
     nfts,
+    avatars,
+    lands,
+    upgradeCards,
     crystal,
     mineral,
     fuel,
