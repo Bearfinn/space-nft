@@ -3,14 +3,15 @@ import { FunctionComponent } from "react";
 
 interface IconProps {
   type: "CRYSTAL" | "MINERAL" | "FUEL";
+  size?: number;
 }
 
-const Icon: FunctionComponent<IconProps> = ({ type }) => {
+const Icon: FunctionComponent<IconProps> = ({ type, size = 24 }) => {
   return (
     <Image
       src={`/assets/${type.toLocaleLowerCase()}.png`}
-      width={24}
-      height={24}
+      width={size}
+      height={size}
       alt={type.toLocaleLowerCase()}
     ></Image>
   );
