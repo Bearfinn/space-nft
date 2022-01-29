@@ -54,7 +54,8 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
         </div>
         <div className="px-8">
           <div className="text-xl my-4 uppercase">
-            {ship.name}
+            {/* TODO: Update metadata to be truthful */}
+            {ship.name === "defender" ? "miner" : ship.name}
             {isInFleet && (
               <span className="ml-2 bg-teal-300 text-stone-900 rounded p-2 text-xs font-medium">
                 On Fleet
@@ -83,7 +84,9 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
             <FleetProperty
               name="Mining Speed"
               value={(ship?.miningSpeed || 0) + stats[3]}
-              showUpgradeButton={!!ship?.miningSpeed && ship.miningSpeed !== 0 && canUpgrade}
+              showUpgradeButton={
+                !!ship?.miningSpeed && ship.miningSpeed !== 0 && canUpgrade
+              }
               onClick={() => updateStats(3, stats[3] + 1)}
             />
           </div>
