@@ -26,8 +26,6 @@ export const useNFTs = () => {
       const upgradeCards: any[] = [];
       const ships: any[] = [];
 
-      console.log(contractAddress)
-
       const promises = data?.result
         .filter((nft) => {
           return nft.token_address.toLowerCase() === contractAddress?.toLowerCase()

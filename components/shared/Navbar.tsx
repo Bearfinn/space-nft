@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
-import { shortenAddress } from "utils/format";
+import { formatNumber, shortenAddress } from "utils/format";
 
 interface NavbarProps {}
 
@@ -91,13 +91,13 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
         {user && (
           <div className="flex gap-4">
             <div className="flex gap-2 items-center">
-              {crystal} <Icon type="CRYSTAL" />
+              {formatNumber(crystal)} <Icon type="CRYSTAL" />
             </div>
             <div className="flex gap-2 items-center">
-              {mineral} <Icon type="MINERAL" />
+              {formatNumber(mineral)} <Icon type="MINERAL" />
             </div>
             <div className="flex gap-2 items-center">
-              {fuel} <Icon type="FUEL" />
+              {formatNumber(fuel)} <Icon type="FUEL" />
             </div>
           </div>
         )}
