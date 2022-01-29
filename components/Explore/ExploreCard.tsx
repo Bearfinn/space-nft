@@ -25,7 +25,7 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = ({
         <div className="col-span-3">
           <Image
             className="animate-pulse"
-            src="/assets/oil-refinery.png"
+            src="/assets/planet.png"
             alt="Refinery"
             width={160}
             height={160}
