@@ -10,11 +10,11 @@ interface FleetPageProps {}
 
 const FleetPage: FunctionComponent<FleetPageProps> = () => {
   const { fleetTokenIds } = useShip();
-  const { nfts } = useNFTs();
+  const [isLoading, setIsLoading] = useState(false);
   const [fleets, setFleets] = useState<(Ship | null)[]>([]);
 
   const { contractAddress } = useContract("SNFT");
-  const { account, Moralis } = useMoralis();
+  const { Moralis } = useMoralis();
 
   const getFleets = useCallback(async () => {
     let index = 0;
@@ -64,8 +64,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
           miningSpeed: getAttributes("Mining Speed"),
           shipType: getAttributes("Ship Type"),
           skinId: getAttributes("Skin Id"),
-          color: getAttributes("Color")
-          
+          color: getAttributes("Color"),
         } as Ship;
       } else {
         fleets[index] = null;
@@ -78,7 +77,10 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
 
   useEffect(() => {
     if (fleetTokenIds) {
-      getFleets().then((fleets) => setFleets(fleets));
+      setIsLoading(true);
+      getFleets()
+        .then((fleets) => setFleets(fleets))
+        .then(() => setIsLoading(false));
     }
   }, [fleetTokenIds, getFleets]);
 
@@ -86,11 +88,19 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
     <div className="container max-w-2xl mx-auto mb-16">
       <div className="text-4xl font-mono my-8">Fleet</div>
 
-      <div className="grid grid-cols-2 gap-8">
-        {fleets.map((ship, index) => {
-          return <FleetCard ship={ship} key={`ship-${index}`} onInspect={() => {}} />;
-        })}
-      </div>
+      {!isLoading && (
+        <div className="grid grid-cols-2 gap-8">
+          {fleets.map((ship, index) => {
+            return (
+              <FleetCard
+                ship={ship}
+                key={`ship-${index}`}
+                onInspect={() => {}}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
