@@ -2,6 +2,7 @@ import Button from "components/base/Button";
 import Icon from "components/base/Icon";
 import Image from "next/image";
 import { FunctionComponent } from "react";
+import ReactTooltip from "react-tooltip";
 
 interface ExploreCardProps {
   name: string;
@@ -20,7 +21,7 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = ({
 }) => {
   return (
     <div className="bg-stone-900 bg-opacity-75 mt-8">
-      <div className="grid grid-cols-12 p-8 items-center">
+      <div className="grid grid-cols-12 gap-4 p-8 items-center">
         <div className="col-span-3">
           <Image
             className="animate-pulse"
@@ -32,7 +33,7 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = ({
         </div>
         <div className="col-span-9">
           <div className="text-xl uppercase">{name}</div>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
                 Distance
@@ -44,8 +45,23 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = ({
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
                 Minimum Duration
+                <span
+                  className="material-icons text-white text-sm ml-1 cursor-help"
+                  data-tip
+                  data-for="duration-hint"
+                >
+                  help_outline
+                </span>
               </div>
               <div className="mt-1 font-mono">{duration} Seconds</div>
+              <ReactTooltip
+                effect="solid"
+                id="duration-hint"
+                className="bg-teal-800 bg-opacity-75"
+              >
+                Duration will increase if the fleet finds a mineral source.
+                Mining duration will depend on your fleet&apos;s mining stats.
+              </ReactTooltip>
             </div>
             <div className="mt-8">
               <div className="text-stone-500 tracking-widest uppercase text-xs">
