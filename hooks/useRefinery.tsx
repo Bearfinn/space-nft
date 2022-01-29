@@ -1,12 +1,11 @@
 import SNFTABI from "constants/abi/SNFT.json";
+import { REFRESH_TIME } from "constants/config";
 import { CONTRACTS } from "constants/contracts";
 import { useEffect, useMemo } from "react";
-import {
-  useChain,
-  useMoralis, useWeb3ExecuteFunction
-} from "react-moralis";
+import { useChain, useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { RefineryInfo } from "types/Items";
 import { useExecuteFunction } from "./useExecuteFunction";
+import { useTrigger } from "./useUpdate";
 
 export const useRefinery = () => {
   const { account, Moralis } = useMoralis();
@@ -27,15 +26,13 @@ export const useRefinery = () => {
     params: { "": account },
   });
 
-  const {
-    data: calculatedRefinery,
-    fetch: calculateRefinery,
-  } = useWeb3ExecuteFunction({
-    contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "calculateRefinery",
-    abi: SNFTABI,
-    params: { "": account },
-  });
+  const { data: calculatedRefinery, fetch: calculateRefinery } =
+    useWeb3ExecuteFunction({
+      contractAddress: CONTRACTS["SNFT"][chainId],
+      functionName: "calculateRefinery",
+      abi: SNFTABI,
+      params: { "": account },
+    });
 
   const refinery = useMemo<RefineryInfo | null>(() => {
     if (!refineryInfo) return null;
@@ -51,16 +48,23 @@ export const useRefinery = () => {
     return {
       consumePerSecond: Moralis.Units.FromWei(consumePerSecond),
       productionPerSecond: Moralis.Units.FromWei(productionPerSecond),
-      waitingToClaim: Number(Moralis.Units.FromWei(waitingToClaim)) + Number(Moralis.Units.FromWei(production)),
+      waitingToClaim:
+        Number(Moralis.Units.FromWei(waitingToClaim)) +
+        Number(Moralis.Units.FromWei(production)),
       lastUpdateTime: new Date(Moralis.Units.FromWei(lastUpdateTime, 0)),
       mineralSpenditure: Number(Moralis.Units.FromWei(mineralSpenditure)),
     };
   }, [Moralis.Units, refineryInfo, calculatedRefinery]);
 
+  const { trigger } = useTrigger();
+
   useEffect(() => {
-    getRefineryInfo()
-    calculateRefinery()
-  }, [Moralis.Units, account, calculateRefinery, getRefineryInfo]);
+    const timer = setInterval(() => {
+      getRefineryInfo();
+      calculateRefinery();
+    }, REFRESH_TIME)
+    return () => clearInterval(timer)
+  }, [Moralis.Units, account, calculateRefinery, getRefineryInfo, trigger]);
 
   const upgradeRefinery = useExecuteFunction<{ upgradeCount: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],

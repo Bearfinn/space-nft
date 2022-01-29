@@ -5,6 +5,7 @@ import Image from "next/image";
 import Icon from "components/base/Icon";
 import { useNFTs } from "hooks/useNFTs";
 import { formatNumber } from "utils/format";
+import { useTrigger } from "hooks/useUpdate";
 
 interface RefineryPageProps {}
 
@@ -12,6 +13,8 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
   const { mineral } = useNFTs();
   const { refineryInfo, upgradeRefinery, claimRefinery } = useRefinery();
   const [upgradeCount, setUpgradeCount] = useState(1);
+  const { makeTrigger } = useTrigger()
+
   return (
     <div className="container mx-auto max-w-4xl">
       <div className="text-4xl font-mono mt-8">Refinery</div>
@@ -59,7 +62,7 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
             <Button onClick={() => upgradeRefinery({ upgradeCount })}>
               Upgrade
             </Button>
-            <div>
+            <div className="text-center">
               <input
                 className="bg-black py-1 w-24 ml-2 text-right"
                 type="number"
@@ -70,7 +73,7 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 maxLength={2}
                 onChange={(e) => setUpgradeCount(Number(e.target.value))}
               ></input>
-              <div className="flex items-center text-sm text-center mt-2">
+              <div className="flex items-center text-sm mt-2 justify-center">
                 Cost: {upgradeCount}
                 <span className="ml-1">
                   <Icon size={16} type="CRYSTAL" />
@@ -93,11 +96,11 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 Available for Claim
               </div>
               <div className="mt-1 font-mono">
-                {formatNumber(refineryInfo?.waitingToClaim)} <Icon type="CRYSTAL" />
+                {formatNumber(refineryInfo?.waitingToClaim || 0)} <Icon type="CRYSTAL" />
               </div>
             </div>
             <div className="">
-              <Button onClick={() => claimRefinery({})}>Claim</Button>
+              <Button onClick={() => claimRefinery({}).then(() => makeTrigger())}>Claim</Button>
             </div>
           </div>
         </div>

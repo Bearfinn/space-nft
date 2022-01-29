@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useMoralis, useNFTBalances } from "react-moralis";
 import { GeneralNFT, IShipMetadata, Ship } from "types/Items";
 import { useContract } from "./useContract";
+import { useTrigger } from "./useUpdate";
 
 export const useNFTs = () => {
   const [mineral, setMineral] = useState(0);
@@ -14,6 +15,7 @@ export const useNFTs = () => {
 
   const { account, Moralis } = useMoralis();
   const { contractAddress, abi } = useContract("SNFT");
+  const { trigger } = useTrigger();
 
   const { data } = useNFTBalances({
     chain: "avalanche testnet",
@@ -114,13 +116,15 @@ export const useNFTs = () => {
         });
 
       await Promise.all(promises);
+      console.log("triggered", data?.result?.length)
+
       setNfts(ships);
       setAvatars(avatars);
       setLands(lands);
       setUpgradeCards(upgradeCards)
     };
     getNfts();
-  }, [Moralis.Units, data, account, contractAddress]);
+  }, [Moralis.Units, data, account, contractAddress, trigger]);
 
   return {
     nfts,
