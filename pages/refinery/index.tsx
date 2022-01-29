@@ -3,7 +3,7 @@ import { useRefinery } from "hooks/useRefinery";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import Icon from "components/base/Icon";
-import { useNFTs } from "hooks/useInventory";
+import { useNFTs } from "hooks/useNFTs";
 
 interface RefineryPageProps {}
 

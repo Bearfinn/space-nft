@@ -83,6 +83,7 @@ export const useNFTs = () => {
               );
               return attribute?.value || null;
             };
+
             ships.push({
               tokenId,
               amount: parseInt(nft.amount || "0"),
@@ -105,7 +106,7 @@ export const useNFTs = () => {
       setNfts(ships);
     };
     getNfts();
-  }, [Moralis.Units, data, account]);
+  }, [Moralis.Units, data, account, contractAddress]);
 
   return {
     nfts,

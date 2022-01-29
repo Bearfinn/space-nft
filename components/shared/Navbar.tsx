@@ -1,6 +1,6 @@
 import Button from "components/base/Button";
 import Icon from "components/base/Icon";
-import { useNFTs } from "hooks/useInventory";
+import { useNFTs } from "hooks/useNFTs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FunctionComponent, useCallback, useEffect, useState } from "react";

@@ -1,7 +1,7 @@
 import FleetCard from "components/Ship/ShipCard";
 import { useContract } from "hooks/useContract";
 import { useShip } from "hooks/useShip";
-import { useNFTs } from "hooks/useInventory";
+import { useNFTs } from "hooks/useNFTs";
 import { FunctionComponent, useEffect, useCallback, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Ship, IShipMetadata } from "types/Items";

@@ -1,6 +1,6 @@
 import ShipCard from "components/Ship/ShipCard";
 import ShipModal from "components/Ship/ShipModal";
-import { useNFTs } from "hooks/useInventory";
+import { useNFTs } from "hooks/useNFTs";
 import { FunctionComponent, useState } from "react";
 import { Ship } from "types/Items";
 

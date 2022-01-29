@@ -1,6 +1,6 @@
 import Button from "components/base/Button";
+import { useNFTs } from "hooks/useNFTs";
 import { useShip } from "hooks/useShip";
-import Image from "next/image";
 import Link from "next/link";
 import { FunctionComponent, useMemo, useState } from "react";
 import { Ship } from "types/Items";
@@ -14,6 +14,7 @@ interface ShipCardProps {
 const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
   const { addShipToFleet, removeShipFromFleet, upgradeShip, fleetTokenIds } =
     useShip();
+  const { crystal } = useNFTs();
 
   const initialStats = useMemo(() => {
     return [0, 0, 0, 0];
@@ -32,6 +33,9 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
     });
   };
 
+  const upgradeCost = (stats[0] + stats[1] + stats[2] + stats[3]) * 0.5;
+  const canUpgrade = crystal > upgradeCost;
+
   const isChanged = useMemo(() => {
     return !initialStats.every((stat, index) => stat === stats[index]);
   }, [initialStats, stats]);
@@ -41,41 +45,45 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
     <div className="rounded-lg bg-stone-900 flex flex-col justify-between bg-opacity-75 w-72 hover:shadow-lg hover:shadow-teal-300/50 transition opacity-80 hover:opacity-100">
       <div>
         <div className="rounded-t-lg relative">
-          <img
-            src={ship.src}
-            alt="Spaceship"
-            width={360}
-            height={200}
-          ></img>
+          <img src={ship.src} alt="Spaceship" width={360} height={200}></img>
           <div className="absolute top-3 right-3">
-            <Button onClick={() => onInspect(ship)}>🔍</Button>
+            <Button onClick={() => onInspect(ship)}>
+              <span className="material-icons">search</span>
+            </Button>
           </div>
         </div>
         <div className="px-8">
-          <div className="text-xl my-4 uppercase">{ship.name}
-          {isInFleet && (
-            <span className="ml-2 bg-teal-300 text-stone-900 rounded p-2 text-xs font-medium">On Fleet</span>
-          )}
+          <div className="text-xl my-4 uppercase">
+            {ship.name}
+            {isInFleet && (
+              <span className="ml-2 bg-teal-300 text-stone-900 rounded p-2 text-xs font-medium">
+                On Fleet
+              </span>
+            )}
           </div>
           <div className="divide-y divide-slate-700">
             <FleetProperty
               name="HP"
               value={(ship?.hp || 0) + stats[0]}
+              showUpgradeButton={canUpgrade}
               onClick={() => updateStats(0, stats[0] + 1)}
             />
             <FleetProperty
               name="Attack"
               value={(ship?.attack || 0) + stats[1]}
+              showUpgradeButton={canUpgrade}
               onClick={() => updateStats(1, stats[1] + 1)}
             />
             <FleetProperty
               name="Travel Speed"
               value={(ship?.travelSpeed || 0) + stats[2]}
+              showUpgradeButton={canUpgrade}
               onClick={() => updateStats(2, stats[2] + 1)}
             />
             <FleetProperty
               name="Mining Speed"
               value={(ship?.miningSpeed || 0) + stats[3]}
+              showUpgradeButton={!!ship?.miningSpeed && ship.miningSpeed !== 0 && canUpgrade}
               onClick={() => updateStats(3, stats[3] + 1)}
             />
           </div>
@@ -97,7 +105,7 @@ const ShipCard: FunctionComponent<ShipCardProps> = ({ ship, onInspect }) => {
                   })
                 }
               >
-                Upgrade
+                Upgrade <span className="text-sm">({upgradeCost} CRYSTAL)</span>
               </Button>
               <Button
                 className="px-4 py-2 text-black"

@@ -4,12 +4,14 @@ import { FunctionComponent } from "react";
 interface FleetPropertyProps {
   name: string;
   value: any;
+  showUpgradeButton?: boolean;
   onClick: () => void;
 }
 
 const FleetProperty: FunctionComponent<FleetPropertyProps> = ({
   name,
   value,
+  showUpgradeButton = true,
   onClick,
 }) => {
   return (
@@ -18,8 +20,13 @@ const FleetProperty: FunctionComponent<FleetPropertyProps> = ({
       <div className="col-span-2 text-right">{value}</div>
       <div className="col-span-1">
         <button
-          onClick={() => onClick()}
-          className="px-2 border-teal-300 border text-center rounded-lg"
+          disabled={!showUpgradeButton}
+          onClick={() => showUpgradeButton && onClick()}
+          className={`${
+            showUpgradeButton
+              ? "border-teal-300 border cursor-pointer"
+              : "border border-stone-700 text-stone-700 cursor-not-allowed"
+          } px-2  text-center rounded-lg`}
         >
           +
         </button>
