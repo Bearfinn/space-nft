@@ -3,7 +3,7 @@ import Icon from "components/base/Icon";
 import { useNFTs } from "hooks/useInventory";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FunctionComponent, useCallback, useEffect } from "react";
+import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { shortenAddress } from "utils/format";
 
@@ -36,15 +36,20 @@ const menuList = [
   },
 ];
 
-const resources = [{ name: "Mineral" }, { name: "Crystal" }, { name: "Fuel" }];
-
 const Navbar: FunctionComponent<NavbarProps> = () => {
   const router = useRouter();
 
+  const [hasLoggedOut, setHasLoggedOut] = useState(false);
   const { crystal, mineral, fuel } = useNFTs();
 
-  const { authenticate, isInitialized, isAuthenticated, user, enableWeb3 } =
-    useMoralis();
+  const {
+    authenticate,
+    isInitialized,
+    isAuthenticated,
+    user,
+    logout,
+    enableWeb3,
+  } = useMoralis();
 
   const signIn = useCallback(() => {
     authenticate({
@@ -53,10 +58,10 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
   }, [authenticate]);
 
   useEffect(() => {
-    if (isInitialized && !isAuthenticated) {
+    if (isInitialized && !isAuthenticated && !hasLoggedOut) {
       signIn();
     }
-  }, [isAuthenticated, isInitialized, signIn]);
+  }, [hasLoggedOut, isAuthenticated, isInitialized, signIn]);
 
   useEffect(() => {
     if (isInitialized) {
@@ -65,7 +70,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
   }, [enableWeb3, isInitialized]);
 
   return (
-    <div className="p-8 bg-black bg-opacity-75 flex justify-between sticky">
+    <div className="p-8 bg-black bg-opacity-75 h-24 flex justify-between items-center sticky">
       <div className="space-x-8">
         {menuList.map(({ name, href }) => {
           return (
@@ -97,8 +102,21 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           </div>
         )}
 
-        {user ? (
-          <Button>{shortenAddress(user?.get("ethAddress"))}</Button>
+        {(user && isAuthenticated) ? (
+          <div className="group">
+            <Button
+              className="hidden group-hover:block bg-teal-300 px-4 py-2 h-12 rounded text-black"
+              onClick={() => {
+                setHasLoggedOut(true)
+                logout()
+              }}
+            >
+              Disconnect
+            </Button>
+            <Button className="group-hover:hidden h-12 text-teal-300">
+              {shortenAddress(user?.get("ethAddress"))}
+            </Button>
+          </div>
         ) : (
           <Button onClick={() => signIn()}>Connect Wallet</Button>
         )}
