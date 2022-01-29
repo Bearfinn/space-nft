@@ -20,9 +20,9 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
         </div>
         <div className="col-span-1">
           <ShopCard
-            title="Fuel"
-            description="Fuel drives up your ships"
-            action="Buy with GRB"
+            title="1 Fuel"
+            description="Fuel is required to power your spaceships in exploration (Price: 0.3 CRYSTAL)"
+            action="Buy with CRYSTAL"
             onClick={() => buyFuel({ _amount: 1 })}
           ></ShopCard>
         </div>
