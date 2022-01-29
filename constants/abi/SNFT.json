@@ -409,32 +409,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "LinkToken",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "VRFCoordinator",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -595,8 +569,28 @@
   },
   {
     "inputs": [],
+    "name": "createTestBoosterPackForFree",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "createTestShipForFree",
     "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "createTestUpgradeCardForFree",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -672,6 +666,37 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fuelPerDistance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "randomNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "fulfillRandomness",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -882,24 +907,6 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "requestId",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "uint256",
-        "name": "randomness",
-        "type": "uint256"
-      }
-    ],
-    "name": "rawFulfillRandomness",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "_tokenId",
         "type": "uint256"
@@ -1038,6 +1045,64 @@
     "name": "setApprovalForAll",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_grb",
+        "type": "address"
+      }
+    ],
+    "name": "setGRBToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_staker",
+        "type": "address"
+      }
+    ],
+    "name": "setStaker",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vrf",
+        "type": "address"
+      }
+    ],
+    "name": "setVrf",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "shipIndexOnFleet",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1550,6 +1615,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "mineralsFound",
+        "type": "uint256"
+      },
+      {
         "internalType": "enum SNFT.ExplorationType",
         "name": "currentExplorationType",
         "type": "uint8"
@@ -1609,7 +1679,7 @@
     "outputs": [
       {
         "internalType": "bool",
-        "name": "userInitialized",
+        "name": "",
         "type": "bool"
       }
     ],
@@ -1669,6 +1739,19 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrf",
+    "outputs": [
+      {
+        "internalType": "contract IVRFProvider",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",

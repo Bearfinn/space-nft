@@ -5,20 +5,18 @@ import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useInitialize = () => {
   const { account } = useMoralis();
-  const { contractAddress, abi } = useContract("SNFT");
+  const nftContract = useContract("SNFT");
 
-  const { data: isUserInitialized, fetch: getUserInitialized, error } =
+  const { data: isUserInitialized, fetch: getUserInitialized } =
     useWeb3ExecuteFunction({
-      contractAddress,
       functionName: "userInitialized",
-      abi,
       params: { "address": account },
+      ...nftContract
     });
 
   const initializeUser = useExecuteFunction({
-    contractAddress,
     functionName: "initializeUser",
-    abi,
+    ...nftContract,
   });
 
   useEffect(() => {
@@ -26,7 +24,7 @@ export const useInitialize = () => {
   }, [getUserInitialized]);
 
   return {
-    isUserInitialized,
+    isUserInitialized: isUserInitialized || true,
     initializeUser,
   };
 };

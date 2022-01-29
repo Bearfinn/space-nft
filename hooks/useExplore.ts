@@ -18,7 +18,7 @@ interface IExplorationStatus {
 }
 
 export const useExplore = () => {
-  const { account } = useMoralis();
+  const { account, Moralis } = useMoralis();
   const nftContract = useContract("SNFT");
 
   const { data: rawExplorationStatus, fetch: getExplorationStatus }: any =
@@ -36,14 +36,16 @@ export const useExplore = () => {
         rawExplorationStatus.currentExplorationDistance.toNumber(),
       currentExplorationType: rawExplorationStatus.currentExplorationType,
       currentMissionFailed: rawExplorationStatus.currentMissionFailed,
-      mineralsFound: rawExplorationStatus.mineralsFound?.toNumber() || 0,
+      mineralsFound: Number(
+        Moralis.Units.FromWei(rawExplorationStatus.mineralsFound || "0")
+      ),
       damageTaken: rawExplorationStatus.damageTaken.toNumber() || 0,
       exploreCompleteTime: new Date(
         rawExplorationStatus.exploreCompleteTime.toNumber() * 1000
       ),
       fleetOnExplore: rawExplorationStatus.fleetOnExplore,
     } as IExplorationStatus;
-  }, [rawExplorationStatus]);
+  }, [Moralis.Units, rawExplorationStatus])
 
   useEffect(() => {
     getExplorationStatus();
@@ -62,12 +64,12 @@ export const useExplore = () => {
   return {
     explorationStatus,
     explore: async ({ _distance }: any) => {
-      await explore({ _distance })
-      await getExplorationStatus()
+      await explore({ _distance });
+      await getExplorationStatus();
     },
     claimExploration: async () => {
-      await claimExploration()
-      await getExplorationStatus()
+      await claimExploration();
+      await getExplorationStatus();
     },
   };
 };

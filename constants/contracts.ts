@@ -5,6 +5,6 @@ enum ChainId {
 
 export const CONTRACTS = {
   SNFT: {
-    [ChainId.AVAX_TESTNET]: "0x87FCcb47B78F24Ee0fDFFEDC7A4023c2d9c16B5b" ,
+    [ChainId.AVAX_TESTNET]: "0xF65f645e961c50cb62B02A8E671B9FE28c711899" ,
   }
 }
