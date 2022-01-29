@@ -12,10 +12,10 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
       <div className="grid grid-cols-2 gap-8 mt-8">
         <div className="col-span-1">
           <ShopCard
-            title="GRB Token"
-            description="GRB token is used for several activities"
+            title="100 GRB Token"
+            description="GRB token is used for several activities (Price: 1 AVAX)"
             action="Buy with AVAX"
-            onClick={() => buyGRB({ _amountGRB: 100 })}
+            onClick={() => buyGRB({ _amountGRB: 100 }, "1")}
           ></ShopCard>
         </div>
         <div className="col-span-1">
