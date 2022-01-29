@@ -41,7 +41,7 @@ const ExplorePage = () => {
     return encounterMessages.find(
       (encounterMessage) =>
         encounterMessage.type === encounterType &&
-        (encounterMessage.missionFailed === undefined
+        (encounterMessage.missionFailed !== undefined
           ? encounterMessage.missionFailed === currentMissionFailed
           : true)
     );
@@ -54,7 +54,7 @@ const ExplorePage = () => {
     return explorationMessages.find(
       (encounterMessage) =>
         encounterMessage.type === explorationType &&
-        (encounterMessage.missionFailed === undefined
+        (encounterMessage.missionFailed !== undefined
           ? encounterMessage.missionFailed === currentMissionFailed
           : true)
     );
