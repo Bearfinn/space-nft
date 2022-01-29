@@ -70,9 +70,9 @@ const RefineryPage: FunctionComponent<RefineryPageProps> = () => {
                 maxLength={2}
                 onChange={(e) => setUpgradeCount(Number(e.target.value))}
               ></input>
-              <div className="text-sm text-center mt-2">
+              <div className="flex items-center text-sm text-center mt-2">
                 Cost: {upgradeCount}
-                <span className="ml-2">
+                <span className="ml-1">
                   <Icon size={16} type="CRYSTAL" />
                 </span>
               </div>

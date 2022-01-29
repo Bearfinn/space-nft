@@ -76,6 +76,12 @@ const ExploreCard: FunctionComponent<ExploreCardProps> = ({
       <div className="flex justify-between px-4 py-4 bg-stone-900">
         <div className=""></div>
         <div className="flex gap-4 items-center text-right">
+          <div className="text-xs flex items-center">
+            Cost: {distance * 2}
+            <span className="ml-1">
+              <Icon size={16} type="FUEL" />
+            </span>
+          </div>
           <div className="">
             <Button onClick={() => onExplore()}>Explore</Button>
           </div>
