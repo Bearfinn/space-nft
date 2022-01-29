@@ -15,7 +15,7 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
             title="100 GRB Token"
             description="GRB token is used for several activities (Price: 1 AVAX)"
             action="Buy with AVAX"
-            onClick={() => buyGRB({ _amountGRB: 100 }, "1")}
+            onClick={() => buyGRB({ _amountGRB: 100 }, "1000000000000000000")}
           ></ShopCard>
         </div>
         <div className="col-span-1">
@@ -29,19 +29,19 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
         <div className="col-span-1">
           <ShopCard
             title="Booster Pack"
-            description="Get randomized ships"
-            action="Buy with Crystal"
+            description="Get randomized spaceships (Price: 1 GRB)"
+            action="Buy with GRB"
             onClick={() => buyBoosterPack()}
           ></ShopCard>
         </div>
-        <div className="col-span-1">
+        {/* <div className="col-span-1">
           <ShopCard
             title="Additional Inventory Slot"
             description="More items!"
             action="Buy with GRB"
             onClick={() => {}}
           ></ShopCard>
-        </div>
+        </div> */}
         <div className="col-span-1">
           <ShopCard
             title="Free Ship!"

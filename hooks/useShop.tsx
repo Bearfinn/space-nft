@@ -17,7 +17,7 @@ export const useShop = () => {
 
   const buyBoosterPack = useExecuteFunction<{ upgradeCount: number }>({
     contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "buyBoosterPackAVAX",
+    functionName: "buyBoosterPackGRB",
     abi: SNFTABI,
   });
 
