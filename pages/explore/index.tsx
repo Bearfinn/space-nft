@@ -2,6 +2,7 @@ import Button from "components/base/Button";
 import Icon from "components/base/Icon";
 import ExploreCard from "components/Explore/ExploreCard";
 import { useExplore } from "hooks/useExplore";
+import { useNFTs } from "hooks/useNFTs";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import dayjs from "utils/dayjs";
@@ -18,6 +19,7 @@ const planets = generateScientificNames(5);
 const ExplorePage = () => {
   const fleetPower: [number, number, number, number, number] = [0, 0, 0, 1, 0];
   const [, , , travelSpeed, power] = fleetPower;
+  const { crystal } = useNFTs();
 
   const getDifficulty = (distance: number, fleetPower: number) => {
     if (distance == 1 && fleetPower > 100) return "easy";
@@ -83,6 +85,9 @@ const ExplorePage = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [explorationStatus]);
+
+  const canFinishExploration =
+    explorationStatus && crystal > explorationStatus.damageTaken * 0.01;
 
   return (
     <div className="container mx-auto max-w-4xl">
@@ -150,9 +155,17 @@ const ExplorePage = () => {
                     )}
                   </div>
                   <div className="mt-4">
-                    <Button onClick={() => claimExploration()}>
-                      Finish Exploration
-                    </Button>
+                    {canFinishExploration ? (
+                      <Button onClick={() => claimExploration()}>
+                        Finish Exploration
+                      </Button>
+                    ) : (
+                      <div className="text-red-500 my-6">
+                        You have insufficient{" "}
+                        <Icon type="CRYSTAL" size={16}></Icon> to finish
+                        exploration
+                      </div>
+                    )}
                     <div className="text-center mt-2">
                       {explorationStatus.damageTaken > 0 && (
                         <div className="text-red-500 text-sm">
