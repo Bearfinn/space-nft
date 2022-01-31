@@ -1,43 +1,42 @@
-import SNFTABI from "constants/abi/SNFT.json";
-import { CONTRACTS } from "constants/contracts";
+import { ethers } from "ethers";
 import { useMemo } from "react";
 import {
   useChain,
   useMoralis
 } from "react-moralis";
+import { useContract } from "./useContract";
 import { useExecuteFunction } from "./useExecuteFunction";
 
 export const useShop = () => {
-  const { account, Moralis } = useMoralis();
+  const { Moralis } = useMoralis()
   const { chainId: chainIdHex } = useChain();
   const chainId = useMemo(
     () => parseInt(chainIdHex || "", 16).toString() as "43113",
     [chainIdHex]
   );
+  const nftContract = useContract("SNFT");
 
   const buyBoosterPack = useExecuteFunction<{ upgradeCount: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "buyBoosterPackGRB",
-    abi: SNFTABI,
+    ...nftContract,
   });
 
   const buyGRB = useExecuteFunction<{ _amountGRB: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "buyGRB",
-    abi: SNFTABI,
+    ...nftContract,
   });
 
   const buyFuel = useExecuteFunction<{ _amount: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
     functionName: "buyFuel",
-    abi: SNFTABI,
+    ...nftContract,
   });
 
-  const getFreeShip = useExecuteFunction<{ _amount: number }>({
-    contractAddress: CONTRACTS["SNFT"][chainId],
-    functionName: "createTestShipForFree",
-    abi: SNFTABI,
-  });
+  const getFreeShip = async () => {
+    const web3Provider = await Moralis.enableWeb3();
+    const signer = web3Provider.getSigner();
+    const contract = new ethers.Contract(nftContract.contractAddress, nftContract.abi, signer);
+    await contract.createTestShipForFree({ gasLimit: 400000 });
+  }
 
   return {
     buyBoosterPack,
