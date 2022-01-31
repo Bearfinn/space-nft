@@ -1,4 +1,5 @@
 import Button from "components/base/Button";
+import Icon from "components/base/Icon";
 import ExploreCard from "components/Explore/ExploreCard";
 import { useExplore } from "hooks/useExplore";
 import Image from "next/image";
@@ -128,20 +129,46 @@ const ExplorePage = () => {
                 >
                   <div>
                     {explorationStatus.currentExplorationType ===
-                    ExplorationType.ENCOUNTER
-                      ? getEncounterMessage(
-                          explorationStatus.currentEncounterType,
-                          explorationStatus.currentMissionFailed
-                        )?.message
-                      : getExplorationMessage(
-                          explorationStatus.currentExplorationType,
-                          explorationStatus.currentMissionFailed
-                        )?.message}
+                    ExplorationType.ENCOUNTER ? (
+                      <div className="text-red-500">
+                        {
+                          getEncounterMessage(
+                            explorationStatus.currentEncounterType,
+                            explorationStatus.currentMissionFailed
+                          )?.message
+                        }
+                      </div>
+                    ) : (
+                      <div className="text-white">
+                        {
+                          getExplorationMessage(
+                            explorationStatus.currentExplorationType,
+                            explorationStatus.currentMissionFailed
+                          )?.message
+                        }
+                      </div>
+                    )}
                   </div>
                   <div className="mt-4">
                     <Button onClick={() => claimExploration()}>
                       Finish Exploration
                     </Button>
+                    <div className="text-center mt-2">
+                      {explorationStatus.damageTaken > 0 && (
+                        <div className="text-red-500 text-sm">
+                          Your ship has taken {explorationStatus.damageTaken}{" "}
+                          damage. Fix with{" "}
+                          {explorationStatus.damageTaken * 0.01}{" "}
+                          <Icon type="CRYSTAL" size={16}></Icon>
+                        </div>
+                      )}
+                      {explorationStatus.mineralsFound > 0 && (
+                        <div className="text-sm">
+                          You discovered {explorationStatus.mineralsFound}{" "}
+                          <Icon type="MINERAL" size={16} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               ) : (

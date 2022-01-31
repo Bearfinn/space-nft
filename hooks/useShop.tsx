@@ -5,7 +5,7 @@ import {
   useMoralis
 } from "react-moralis";
 import { useContract } from "./useContract";
-import { useExecuteFunction } from "./useExecuteFunction";
+import { handleTransaction, useExecuteFunction } from "./useExecuteFunction";
 
 export const useShop = () => {
   const { Moralis } = useMoralis()
@@ -35,7 +35,7 @@ export const useShop = () => {
     const web3Provider = await Moralis.enableWeb3();
     const signer = web3Provider.getSigner();
     const contract = new ethers.Contract(nftContract.contractAddress, nftContract.abi, signer);
-    await contract.createTestShipForFree({ gasLimit: 400000 });
+    handleTransaction(() => contract.createTestShipForFree({ gasLimit: 400000 }));
   }
 
   return {

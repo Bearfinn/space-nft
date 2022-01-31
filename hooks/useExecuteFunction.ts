@@ -8,6 +8,37 @@ interface ExecuteFunctionDefinition {
   abi: object;
 }
 
+export const handleTransaction = async (callback: () => Promise<any>) => {
+  const toastId = "transaction";
+
+  try {
+    toast.info("Please approve transaction", {
+      toastId,
+      isLoading: true,
+    });
+    const txResponse: any = await callback()
+    toast.update(toastId, {
+      render: "Confirming...",
+      isLoading: true,
+    });
+    const txReceipt = await txResponse.wait();
+    toast.update(toastId, {
+      type: "success",
+      render: "Transaction successful 🚀",
+      isLoading: false,
+      autoClose: 5000,
+    });
+  } catch (error: any) {
+    toast.update(toastId, {
+      type: "error",
+      render: error?.data?.message || error.message,
+      isLoading: false,
+      autoClose: 5000,
+    });
+    console.error(error);
+  }
+}
+
 export const useExecuteFunction = <ExecuteFunctionParams>({
   contractAddress,
   functionName,
@@ -24,7 +55,7 @@ export const useExecuteFunction = <ExecuteFunctionParams>({
           toastId,
           isLoading: true,
         });
-        const txResponse: any = await Moralis.Web3.executeFunction({
+        const txResponse: any = await Moralis.executeFunction({
           contractAddress,
           functionName,
           abi,

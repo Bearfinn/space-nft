@@ -1,10 +1,12 @@
 import SNFTABI from "constants/abi/SNFT.json";
 import { CONTRACTS } from "constants/contracts";
+import { ethers } from "ethers";
 import { useEffect, useMemo } from "react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
+import { toast } from "react-toastify";
 import { EncounterType, ExplorationType } from "utils/text";
 import { useContract } from "./useContract";
-import { useExecuteFunction } from "./useExecuteFunction";
+import { handleTransaction, useExecuteFunction } from "./useExecuteFunction";
 
 interface IExplorationStatus {
   currentEncounterType: EncounterType;
@@ -50,11 +52,13 @@ export const useExplore = () => {
   useEffect(() => {
     getExplorationStatus();
   }, [getExplorationStatus]);
-
-  const explore = useExecuteFunction<{ _distance: number }>({
-    functionName: "explore",
-    ...nftContract,
-  });
+  
+  const explore = async ({ _distance }: { _distance: any }) => {
+    const web3Provider = await Moralis.enableWeb3();
+    const signer = web3Provider.getSigner();
+    const contract = new ethers.Contract(nftContract.contractAddress, nftContract.abi, signer);
+    handleTransaction(() => contract.explore(_distance, { gasLimit: 400000 }))
+  }
 
   const claimExploration = useExecuteFunction<{}>({
     functionName: "claimExploration",
