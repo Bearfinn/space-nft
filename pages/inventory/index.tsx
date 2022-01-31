@@ -32,7 +32,7 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
 
         {boosterPacks.length > 0 && (
           <>
-            <div className="mt-12 mb-4 text-xl">boosterPacks</div>
+            <div className="mt-12 mb-4 text-xl">Booster Packs</div>
             <div className="grid grid-cols-2">
               {boosterPacks.map((boosterPack) => {
                 return <GeneralCard item={boosterPack} key={boosterPack.name} />;
