@@ -24,7 +24,7 @@ export const useInitialize = () => {
   }, [getUserInitialized]);
 
   return {
-    isUserInitialized: isUserInitialized || true,
+    isUserInitialized,
     initializeUser,
   };
 };
