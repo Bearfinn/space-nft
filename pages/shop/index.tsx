@@ -5,7 +5,16 @@ import { FunctionComponent } from "react";
 interface ShopPageProps {}
 
 const ShopPage: FunctionComponent<ShopPageProps> = () => {
-  const { buyBoosterPack, buyGRB, buyFuel, getFreeShip } = useShop();
+  const {
+    buyBoosterPack,
+    buyGRB,
+    buyFuel,
+    getFreeShip,
+    allowance,
+    balance,
+    approveGRB,
+  } = useShop();
+
   return (
     <div className="container mx-auto max-w-4xl">
       <div className="text-4xl font-mono mt-8">Shop</div>
@@ -29,9 +38,17 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
         <div className="col-span-1">
           <ShopCard
             title="Booster Pack"
-            description="Get randomized spaceships (Price: 1 GRB)"
+            description={`Get randomized spaceships (Price: 1 GRB, Your balance: ${
+              balance || 0
+            } GRB)`}
             action="Buy with GRB"
-            onClick={() => buyBoosterPack()}
+            onClick={() => {
+              if (allowance.gt("0")) {
+                buyBoosterPack();
+              } else {
+                approveGRB().then(() => buyBoosterPack());
+              }
+            }}
           ></ShopCard>
         </div>
         {/* <div className="col-span-1">

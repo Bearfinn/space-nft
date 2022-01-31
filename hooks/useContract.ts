@@ -1,7 +1,6 @@
-import { CONTRACTS } from "constants/contracts";
+import { CONTRACTS, CONTRACT_ABIS } from "constants/contracts";
 import { useMemo } from "react";
 import { useChain } from "react-moralis";
-import SNFTABI from "constants/abi/SNFT.json";
 
 export const useContract = (contractSymbol: keyof typeof CONTRACTS) => {
   const { chainId: chainIdHex } = useChain();
@@ -11,6 +10,6 @@ export const useContract = (contractSymbol: keyof typeof CONTRACTS) => {
   );
   return {
     contractAddress: CONTRACTS[contractSymbol][chainId],
-    abi: SNFTABI,
+    abi: CONTRACT_ABIS[contractSymbol],
   };
 };

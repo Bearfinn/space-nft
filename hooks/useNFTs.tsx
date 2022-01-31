@@ -128,7 +128,6 @@ export const useNFTs = () => {
         });
 
       await Promise.all(promises);
-      console.log("triggered", data?.result?.length)
 
       setNfts(ships);
       setAvatars(avatars);
