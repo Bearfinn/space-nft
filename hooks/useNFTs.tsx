@@ -12,6 +12,7 @@ export const useNFTs = () => {
   const [lands, setLands] = useState<GeneralNFT[]>([]);
   const [avatars, setAvatars] = useState<GeneralNFT[]>([]);
   const [upgradeCards, setUpgradeCards] = useState<GeneralNFT[]>([]);
+  const [boosterPacks, setBoosterPacks] = useState<GeneralNFT[]>([]);
 
   const { account, Moralis } = useMoralis();
   const { contractAddress, abi } = useContract("SNFT");
@@ -26,6 +27,7 @@ export const useNFTs = () => {
     const getNfts = async () => {
       if (!data || !data.result) return [];
 
+      const boosterPacks: GeneralNFT[] = [];
       const avatars: GeneralNFT[] = [];
       const lands: GeneralNFT[] = [];
       const upgradeCards: GeneralNFT[] = [];
@@ -53,6 +55,16 @@ export const useNFTs = () => {
           }
           if (tokenId === 2) {
             setFuel(Number(nft.amount || "0"));
+          }
+
+          // Booster packs
+          if (tokenId === 3) {
+            boosterPacks.push({
+              name: metadata.result.name,
+              description: metadata.result.description,
+              src: metadata.result.image,
+              amount: parseInt(nft.amount || "1"),
+            })
           }
 
           // Avatars
@@ -122,6 +134,7 @@ export const useNFTs = () => {
       setAvatars(avatars);
       setLands(lands);
       setUpgradeCards(upgradeCards)
+      setBoosterPacks(boosterPacks)
     };
     getNfts();
   }, [Moralis.Units, data, account, contractAddress, trigger]);
@@ -131,6 +144,7 @@ export const useNFTs = () => {
     avatars,
     lands,
     upgradeCards,
+    boosterPacks,
     crystal,
     mineral,
     fuel,

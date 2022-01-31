@@ -8,7 +8,7 @@ import { Ship } from "types/Items";
 interface FleetPageProps {}
 
 const FleetPage: FunctionComponent<FleetPageProps> = () => {
-  const { nfts, lands, avatars, upgradeCards } = useNFTs();
+  const { nfts, lands, avatars, upgradeCards, boosterPacks } = useNFTs();
 
   const [showShipInspector, setShowShipInspector] = useState(false);
   const [shipName, setShipName] = useState<string | null>(null);
@@ -29,6 +29,17 @@ const FleetPage: FunctionComponent<FleetPageProps> = () => {
             return <ShipCard ship={nft} key={nft.name} onInspect={inspect} />;
           })}
         </div>
+
+        {boosterPacks.length > 0 && (
+          <>
+            <div className="mt-12 mb-4 text-xl">boosterPacks</div>
+            <div className="grid grid-cols-2">
+              {boosterPacks.map((boosterPack) => {
+                return <GeneralCard item={boosterPack} key={boosterPack.name} />;
+              })}
+            </div>
+          </>
+        )}
 
         {avatars.length > 0 && (
           <>
