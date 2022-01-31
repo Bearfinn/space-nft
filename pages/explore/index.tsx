@@ -127,16 +127,16 @@ const ExplorePage = () => {
                   }`}
                 >
                   <div>
-                    {getExplorationMessage(
-                      explorationStatus.currentExplorationType,
-                      explorationStatus.currentMissionFailed
-                    )?.message}
-                  </div>
-                  <div>
-                    {getEncounterMessage(
-                      explorationStatus.currentEncounterType,
-                      explorationStatus.currentMissionFailed
-                    )?.message}
+                    {explorationStatus.currentExplorationType ===
+                    ExplorationType.ENCOUNTER
+                      ? getEncounterMessage(
+                          explorationStatus.currentEncounterType,
+                          explorationStatus.currentMissionFailed
+                        )?.message
+                      : getExplorationMessage(
+                          explorationStatus.currentExplorationType,
+                          explorationStatus.currentMissionFailed
+                        )?.message}
                   </div>
                   <div className="mt-4">
                     <Button onClick={() => claimExploration()}>
