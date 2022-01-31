@@ -14,7 +14,7 @@ export const useShop = () => {
     ...nftContract,
   });
 
-  const buyGRB = useExecuteFunction<{ _amountGRB: number }>({
+  const buyGRB = useExecuteFunction<{ _amountGRB: string }>({
     functionName: "buyGRB",
     ...nftContract,
   });
@@ -46,8 +46,6 @@ export const useShop = () => {
     params: { "owner": account, "spender": nftContract.contractAddress },
     ...grbContract,
   });
-
-  console.log(account, nftContract.contractAddress, allowance)
 
   const { data: balance, fetch: getBalance }: any = useWeb3ExecuteFunction({
     functionName: "balanceOf",

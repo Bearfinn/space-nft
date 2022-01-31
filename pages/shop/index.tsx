@@ -1,10 +1,12 @@
 import ShopCard from "components/shop/ShopCard";
 import { useShop } from "hooks/useShop";
 import { FunctionComponent } from "react";
+import { useMoralis } from "react-moralis";
 
 interface ShopPageProps {}
 
 const ShopPage: FunctionComponent<ShopPageProps> = () => {
+  const { Moralis } = useMoralis()
   const {
     buyBoosterPack,
     buyGRB,
@@ -24,7 +26,7 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
             title="100 GRB Token"
             description="GRB token is used for several activities (Price: 1 AVAX)"
             action="Buy with AVAX"
-            onClick={() => buyGRB({ _amountGRB: 100 }, "1000000000000000000")}
+            onClick={() => buyGRB({ _amountGRB: Moralis.Units.ETH(100) }, Moralis.Units.ETH(1))}
           ></ShopCard>
         </div>
         <div className="col-span-1">
@@ -39,7 +41,7 @@ const ShopPage: FunctionComponent<ShopPageProps> = () => {
           <ShopCard
             title="Booster Pack"
             description={`Get randomized spaceships (Price: 1 GRB, Your balance: ${
-              balance || 0
+              Moralis.Units.FromWei(balance || 0)
             } GRB)`}
             action="Buy with GRB"
             onClick={() => {
