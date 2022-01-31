@@ -81,7 +81,9 @@ const ExplorePage = () => {
         );
 
       setIsCompleted(remainingTime ? remainingTime.seconds() < 0 : false);
-      setTimer(remainingTime?.format("HH:mm:ss") || null);
+      if (remainingTime) {
+        setTimer(remainingTime.seconds() > 0 ? remainingTime?.format("HH:mm:ss") : null);
+      }
     }, 1000);
     return () => clearInterval(timer);
   }, [explorationStatus]);
